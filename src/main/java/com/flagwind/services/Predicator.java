@@ -46,12 +46,6 @@ public class Predicator extends ArrayList<Predication> {
         }
 
         predications = this.stream().filter(p -> !p.predicate(parameter)).collect(Collectors.toList());
-
-        EventHandler ll = new EventHandler();
-        ll.registerEvent(this, g -> g.Name = "");
-        // this.stream().filter(p->!p.Predicate(parameter)).forEach()
-        Lamdba<Person> pl = new Lamdba<Person>();
-        pl.test(g -> g.Name = "0");
         return predications;
 
     }

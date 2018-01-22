@@ -11,7 +11,7 @@ public class DefaultServiceProviderFactory
         implements ServiceProviderFactory, Iterable<Map.Entry<String, ServiceProvider>> {
 
     //region 单例字段
-    private static ServiceProviderFactory instance;
+    private static DefaultServiceProviderFactory instance;
     //endregion
 
     //region 成员字段
@@ -21,7 +21,7 @@ public class DefaultServiceProviderFactory
 
     // region 构造函数
     protected DefaultServiceProviderFactory() {
-        this("");
+        this("default");
     }
 
     protected DefaultServiceProviderFactory(String defaultName) {
@@ -31,14 +31,14 @@ public class DefaultServiceProviderFactory
     // endregion
 
     // region 单例属性
-    public static ServiceProviderFactory getInstance() {
+    public static DefaultServiceProviderFactory getInstance() {
         if (instance == null) {
             instance = new DefaultServiceProviderFactory();
         }
         return instance;
     }
 
-    public static void setInstance(ServiceProviderFactory factory) {
+    public static void setInstance(DefaultServiceProviderFactory factory) {
         instance = factory;
     }
     // endregion

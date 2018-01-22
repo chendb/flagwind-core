@@ -94,9 +94,9 @@ public abstract class ServiceStorageBase implements ServiceStorage {
     }
 
     @Override
-    public   Iterator<ServiceEntry> getAll(Class<?>  type)
+    public   Iterable<ServiceEntry> getAll(Class<?>  type)
     {
-        return (Iterator<ServiceEntry>)this.find(type, null, true);
+        return (Iterable<ServiceEntry>)this.find(type, null, true);
     }
     // endregion
 

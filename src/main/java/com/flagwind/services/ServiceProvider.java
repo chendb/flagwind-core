@@ -73,12 +73,12 @@ public interface ServiceProvider {
      * @param  {Function|string} serviceType 服务类型。
      * @returns T
      */
-    <T> T   resolve(Class<?> serviceType);
+    <T> T resolve(Class<?> serviceType);
 
     /**
      * 根据指定服务类型获取所有服务实例。
      * @param  {Function} serviceType
      * @returns IEnumerable
      */
-      <T> List<T> resolveAll(Class<?> serviceType);
+      <T> Iterable<T> resolveAll(Class<?> serviceType);
 }

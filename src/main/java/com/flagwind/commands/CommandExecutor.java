@@ -6,9 +6,8 @@ import java.util.Map;
 
 /**
  * 泛型命令接口
- * 
+ *
  * @author chendb
- * @date 2016年12月9日 上午9:29:56
  */
 public class CommandExecutor {
 

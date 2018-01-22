@@ -5,6 +5,8 @@ import com.flagwind.application.base.WorkbenchBase;
 import com.flagwind.events.CancelEventArgs;
 import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
+import com.flagwind.services.ServiceProvider;
+
 import java.util.function.Consumer;
 
 /**
@@ -12,7 +14,7 @@ import java.util.function.Consumer;
  */
 public class Application {
 
-    //#region 私有变量
+    // region 私有变量
 
     /**
      * 标识应用程序是否启动完成
@@ -29,7 +31,9 @@ public class Application {
      */
     private static EventProvider eventProvider;
 
-    //#endregion
+    // endregion
+
+    // region 公共属性
     /**
     * 获取一个事件提供程序实例。
     * @private
@@ -58,6 +62,9 @@ public class Application {
         return context;
     }
 
+    // endregion
+
+    // region 事件名称
     /**
        * 当应用程序启动时产生的事件。
        * @event ApplicationEventArgs
@@ -75,6 +82,10 @@ public class Application {
      * @event CancelEventArgs
      */
     public static String EXITING = "exiting";
+
+    // endregion
+
+    // region 启动/退出
 
     /**
      * 启动应用程序。
@@ -100,7 +111,10 @@ public class Application {
             context = applicationContext;
 
             // 将应用上下文对象注册到默认服务容器中
-            context.getServiceFactory().getDefault().register("applicationContext", applicationContext);
+
+            // if (context.getServiceFactory().getDefault() != null) {
+            //     context.getServiceFactory().getDefault().register("applicationContext", applicationContext);
+            // }
 
             // 初始化全局模块
             initializeGlobalModules(context);
@@ -114,7 +128,6 @@ public class Application {
                 workbench.addListener(workbench.OPENED, (e) -> {
                     // 标识应用程序启动完成
                     isStarted = true;
-
                     // 激发 "started" 事件
                     dispatchEvent(new ApplicationEventArgs(STARTED, context));
                 }, null, false);
@@ -128,25 +141,16 @@ public class Application {
                 workbench.open(args);
             }
         } catch (Exception ex) {
-
             // 重抛异常
             throw ex;
         }
     }
 
-    public static void addListener(String type, Consumer<EventArgs> listener, Object scope, boolean once) {
-        eventProvider.addListener(type, listener, scope, once);
-    }
-
-    public static void removeListener(String type, Consumer<EventArgs> listener, Object scope) {
-        eventProvider.removeListener(type, listener, scope);
-    }
-
     /**
-         * 关闭当前应用程序。
-         * @static
-         * @returns void
-         */
+     * 关闭当前应用程序。
+     * @static
+     * @returns void
+     */
     public static void exit() {
 
         // 如果上下文对象为空，则表示尚未启动
@@ -180,15 +184,64 @@ public class Application {
         context = null;
     }
 
+    
+    // endregion
+
+    // region 对象获取
+
+   /**
+     * 根据名称与对象提供器解析对象
+     * 
+     * @param name 名称
+     * @param providerName 对象提供器解析
+     * @param <T> 解析对象类型
+     * @return 解析后对象
+     * @author chendb
+     * @date 2016年12月9日 上午9:22:58
+     */
+    public static <T> T resolve(String name, String providerName) {
+        ServiceProvider provider = getContext().getServiceFactory().getProvider(providerName);
+        return provider.resolve(name);
+    }
+
+    /**
+     * 根据名称解析对象
+     * 
+     * @param name 名称
+     * @param <T> 解析对象类型
+     * @return 解析后对象
+     * @author chendb
+     * @date 2016年12月9日 上午9:22:58
+     */
+    public static <T> T resolve(String name) {
+        ServiceProvider provider = getContext().getServiceFactory().getDefault();
+        return provider.resolve(name);
+    }
+
+    // endregion
+
+    // region 事件监听与触发
+
+    public static void addListener(String type, Consumer<EventArgs> listener, Object scope, boolean once) {
+        getEventProvider().addListener(type, listener, scope, once);
+    }
+
+    public static void removeListener(String type, Consumer<EventArgs> listener, Object scope) {
+        getEventProvider().removeListener(type, listener, scope);
+    }
+
     /**
     * 派发一个指定参数的事件。
     * @param  {EventArgs} eventArgs 事件参数实例。
     * @returns void
     */
     public static void dispatchEvent(EventArgs args) {
-        eventProvider.dispatchEvent(args);
+        getEventProvider().dispatchEvent(args);
     }
 
+    // endregion
+
+    // region Module 调用
     private static void disposeGlobalModules(ApplicationContextBase context) {
         context.getModules().forEach(p -> {
             if (p != null) {
@@ -204,5 +257,6 @@ public class Application {
             }
         });
     }
+    // endregion
 
 }

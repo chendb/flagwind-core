@@ -14,6 +14,7 @@ import java.util.Set;
  */
 public abstract class ApplicationContextBase {
 
+    // region 私有变量
     /**
      * 应用程序唯一代号
      */
@@ -43,6 +44,10 @@ public abstract class ApplicationContextBase {
      * 当前应用的安全主体
      */
     private Principal principal;
+
+    // endregion
+
+    // region 公共属性
 
     /**
      * @return the applicationId
@@ -137,22 +142,33 @@ public abstract class ApplicationContextBase {
         this.principal = principal;
     }
 
+    // endregion
+
+    // region 服务工厂
+    
     /**
-      * 获取当前应用程序的服务管理对象。
-      * @property
-      * @returns IServiceProviderFactory
-      */
+     * 获取当前应用程序的服务管理对象。
+     *
+     * @property
+     * @returns IServiceProviderFactory
+     */
     public ServiceProviderFactory getServiceFactory() {
         return DefaultServiceProviderFactory.getInstance();
     }
 
+    // endregion
+
+    // region 抽象方法
+
     /**
-         * 创建一个主窗体对象。
-         * 通常子类中实现的该方法只是创建空的工作台对象，并没有构建出该工作台下面的子构件。
-         * 具体构建工作台子构件的最佳时机通常在 Workbench 类的 Open 方法内进行。
-         * @abstract
-         * @returns IWorkbench
-         */
+     * 创建一个主窗体对象。
+     * 通常子类中实现的该方法只是创建空的工作台对象，并没有构建出该工作台下面的子构件。
+     * 具体构建工作台子构件的最佳时机通常在 Workbench 类的 Open 方法内进行。
+     *
+     * @abstract
+     * @returns IWorkbench
+     */
     protected abstract Workbench createWorkbench(String... args);
 
+    // endregion
 }

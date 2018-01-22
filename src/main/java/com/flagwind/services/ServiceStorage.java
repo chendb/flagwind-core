@@ -40,8 +40,8 @@ public interface ServiceStorage extends Iterable<ServiceEntry>
     /**
      * 获取指定服务类型的所有服务项实例。
      * @param  {Function} serviceType 服务类型。
-     * @returns Iterator<ServiceEntry> 服务项列表。
+     * @returns Iterable<ServiceEntry> 服务项列表。
      */
-    Iterator<ServiceEntry> getAll(Class<?> serviceType) ;
+    Iterable<ServiceEntry> getAll(Class<?> serviceType) ;
 
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author chendb
  * @date 2016年12月9日 上午9:31:51
  */
-public class PredicationCollection extends ArrayList<Predication>implements Predication {
+public class PredicationCollection extends ArrayList<Predication> implements Predication {
 
     private static final long serialVersionUID = 6753896880041271740L;
 
@@ -55,16 +55,16 @@ public class PredicationCollection extends ArrayList<Predication>implements Pred
     @Override
     public boolean predicate(Object parameter) {
 
-        if (this.size() < 1)
+        if (this.size() < 1) {
             return true;
+        }
 
         for (Predication p : this) {
             if (p.predicate(parameter)) {
                 if (combination == PredicationCombination.Or) {
                     return true;
                 }
-            }
-            else {
+            } else {
                 if (combination == PredicationCombination.And) {
                     return false;
                 }
