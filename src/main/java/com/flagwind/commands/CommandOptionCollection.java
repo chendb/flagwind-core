@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+/**
+ * 命令参数
+ * @author chendb
+ */
 public class CommandOptionCollection implements Iterable<Entry<String, String>> {
 
     private HashMap<String, String> items;
 
-    // #region 构造函数
+    // region 构造函数
     public CommandOptionCollection() {
         items = new HashMap<>();
     }
@@ -22,7 +26,7 @@ public class CommandOptionCollection implements Iterable<Entry<String, String>> 
         this.items = new HashMap<>();
         its.forEach(g -> items.put(g.getKey(), g.getValue()));
     }
-    // #endregion
+    // endregion
 
     public int size() {
         return this.items.size();
@@ -36,11 +40,6 @@ public class CommandOptionCollection implements Iterable<Entry<String, String>> 
         return this.items.containsKey(key);
     }
 
-    @Override
-    public Iterator<Entry<String, String>> iterator() {
-        return items.entrySet().iterator();
-    }
-
     public boolean add(Entry<String, String> e) {
         items.put(e.getKey(), e.getValue());
         return true;
@@ -51,4 +50,8 @@ public class CommandOptionCollection implements Iterable<Entry<String, String>> 
         return true;
     }
 
+    @Override
+    public Iterator<Entry<String, String>> iterator() {
+        return items.entrySet().iterator();
+    }
 }

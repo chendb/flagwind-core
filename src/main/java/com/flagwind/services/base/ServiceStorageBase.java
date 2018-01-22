@@ -1,7 +1,9 @@
-package com.flagwind.services;
+package com.flagwind.services.base;
 
 import org.apache.commons.lang3.StringUtils;
-
+import com.flagwind.services.ServiceEntry;
+import com.flagwind.services.ServiceProvider;
+import com.flagwind.services.ServiceStorage;
 import java.util.*;
 
 public abstract class ServiceStorageBase implements ServiceStorage {
@@ -24,41 +26,41 @@ public abstract class ServiceStorageBase implements ServiceStorage {
 
     // region 公共方法
 
-    public ServiceEntry add(Object service) {
-        return this.add(service, null);
+    public ServiceEntry register(Object service) {
+        return this.register(service, null);
     }
 
-    public ServiceEntry add(Object service, Class<?>[] contractTypes) {
+    public ServiceEntry register(Object service, Class<?>[] contractTypes) {
         ServiceEntry entry = new ServiceEntry(service, contractTypes);
         this.add(entry);
         return entry;
     }
 
-    public ServiceEntry add(Class<?> serviceType) {
-        return this.add(serviceType, null);
+    public ServiceEntry register(Class<?> serviceType) {
+        return this.register(serviceType, null);
     }
 
-    public ServiceEntry add(Class<?> serviceType, Class<?>[] contractTypes) {
+    public ServiceEntry register(Class<?> serviceType, Class<?>[] contractTypes) {
         ServiceEntry entry = new ServiceEntry(serviceType, contractTypes);
         this.add(entry);
         return entry;
     }
 
-    public ServiceEntry add(String name, Object service) {
-        return this.add(name, service, null);
+    public ServiceEntry register(String name, Object service) {
+        return this.register(name, service, null);
     }
 
-    public ServiceEntry add(String name, Object service, Class<?>[] contractTypes) {
+    public ServiceEntry register(String name, Object service, Class<?>[] contractTypes) {
         ServiceEntry entry = new ServiceEntry(name, service, contractTypes);
         this.add(entry);
         return entry;
     }
 
-    public ServiceEntry add(String name, Class<?> serviceType) {
-        return this.add(name, serviceType, null);
+    public ServiceEntry register(String name, Class<?> serviceType) {
+        return this.register(name, serviceType, null);
     }
 
-    public ServiceEntry add(String name, Class<?> serviceType, Class<?>[] contractTypes) {
+    public ServiceEntry register(String name, Class<?> serviceType, Class<?>[] contractTypes) {
         ServiceEntry entry = new ServiceEntry(name, serviceType, contractTypes);
         this.add(entry);
         return entry;

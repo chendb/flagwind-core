@@ -1,15 +1,35 @@
 package com.flagwind.application;
 
+import com.flagwind.application.base.ApplicationContextBase;
+import com.flagwind.application.base.WorkbenchBase;
 import com.flagwind.events.CancelEventArgs;
 import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
 import java.util.function.Consumer;
 
+/**
+ * @author chendb
+ */
 public class Application {
-    private static boolean isStarted = false; // 标识应用程序是否启动完成
-    private static ApplicationContextBase context = null; // 应用程序上下文实例
-    private static EventProvider eventProvider; // 事件提供程序
 
+    //#region 私有变量
+
+    /**
+     * 标识应用程序是否启动完成
+     */
+    private static boolean isStarted = false;
+
+    /**
+     * 应用程序上下文实例
+     */
+    private static ApplicationContextBase context = null;
+
+    /**
+     * 事件提供程序
+     */
+    private static EventProvider eventProvider;
+
+    //#endregion
     /**
     * 获取一个事件提供程序实例。
     * @private

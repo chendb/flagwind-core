@@ -1,7 +1,4 @@
 package com.flagwind.services;
-
-import java.util.ArrayList;
-import java.util.List;
  
 
 public class ServiceEntry {
@@ -32,9 +29,9 @@ public class ServiceEntry {
     }
 
     public ServiceEntry(Object service, Class<?>[] contractTypes) {
-        service = service;
+        this.service = service;
         serviceType = service.getClass();
-        contractTypes = contractTypes;
+        this.contractTypes = contractTypes;
     }
 
     public String name() {

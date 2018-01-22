@@ -2,7 +2,12 @@ package com.flagwind.commands;
 
 import java.util.Map;
 
+/**
+ * 命令上下文
+ * @author chendb
+ */
 public class CommandContext {
+
     private CommandExecutor executor ;
     private CommandExpression expression;
     private Command command ;

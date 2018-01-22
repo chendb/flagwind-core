@@ -1,5 +1,9 @@
 package com.flagwind.application;
 
+
+/**
+ * 工作台
+ */
 public interface Workbench {
 //    /**
 //     * 当工作台正在打开时产生的事件。
@@ -69,7 +73,6 @@ public interface Workbench {
 
     /**
      * 打开工作台。
-     * @async
      * @param  {Array<string>} args
      * @returns void
      */

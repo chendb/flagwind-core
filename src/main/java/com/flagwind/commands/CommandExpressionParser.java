@@ -11,6 +11,10 @@ import java.util.*;
 
 import static com.flagwind.io.PathAnchor.*;
 
+/**
+ * 命令表达式解析类
+ * @author chendb
+ */
 public class CommandExpressionParser {
     //#region 单例字段
     public static CommandExpressionParser Instance = new CommandExpressionParser();

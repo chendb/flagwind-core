@@ -15,14 +15,15 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class CommandBase<T> implements Command<T>, Predication, Matchable {
 
-    // {{ 私有变量
+    // region 私有变量
     private boolean enabled;
     private Predication predication;
     private String name;
-    // }}
+    // endregion
 
-    // {{ 公共属性
+    // region 公共属性
 
+    @Override
     public String getName() {
         return name;
     }
@@ -32,10 +33,12 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
         this.name = n.get();
     }
 
+    @Override
     public boolean getEnabled() {
         return enabled;
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -61,7 +64,7 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
 
     // }}
 
-    // {{ 外部方法
+    // region 外部方法
 
     @Override
     public final Object execute(T parameter) {
@@ -91,7 +94,7 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
 
     // }}
 
-    // {{ 重载方法
+    // region 重载方法
     @Override
     public boolean isMatch(Object parameter) {
         if (parameter == null) {

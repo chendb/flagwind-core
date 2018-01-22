@@ -1,5 +1,9 @@
 package com.flagwind.commands;
 
+
+/**
+ * 命令执行器上下文
+ */
 public class CommandExecutorContext {
     //#region 成员字段
     private CommandExecutor executor;

@@ -1,11 +1,17 @@
-package com.flagwind.application;
+package com.flagwind.application.base;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.flagwind.application.Workbench;
+import com.flagwind.application.WorkbenchStatus;
 import com.flagwind.events.CancelEventArgs;
 import com.flagwind.events.EventProvider;
+import org.apache.commons.lang3.StringUtils;
 
+
+/**
+ * 工作台基础类
+ */
 public abstract class WorkbenchBase extends EventProvider implements Workbench {
+
 
     // region 成员变量
     private WorkbenchStatus status; // 工作台状态

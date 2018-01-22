@@ -1,12 +1,12 @@
 
 package com.flagwind.application;
 
+import com.flagwind.application.base.ApplicationContextBase;
 import com.flagwind.events.EventArgs;
 
 /**
  * 应用程序事件参数类。
- * @class
- * @version 1.0.0
+ * @author chendb
  */
 public class ApplicationEventArgs extends EventArgs {
     /**

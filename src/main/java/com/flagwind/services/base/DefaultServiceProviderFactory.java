@@ -1,12 +1,14 @@
-package com.flagwind.services;
+package com.flagwind.services.base;
 
 import org.apache.commons.lang3.StringUtils;
-
+import com.flagwind.services.ServiceProvider;
+import com.flagwind.services.ServiceProviderFactory;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DefaultServiceProviderFactory implements ServiceProviderFactory, Iterable<Map.Entry<String, ServiceProvider>> {
+public class DefaultServiceProviderFactory
+        implements ServiceProviderFactory, Iterable<Map.Entry<String, ServiceProvider>> {
 
     //region 单例字段
     private static ServiceProviderFactory instance;
@@ -16,7 +18,6 @@ public class DefaultServiceProviderFactory implements ServiceProviderFactory, It
     private String defaultName;
     private ConcurrentHashMap<String, ServiceProvider> providers;
     //endregion
-
 
     // region 构造函数
     protected DefaultServiceProviderFactory() {
@@ -28,7 +29,6 @@ public class DefaultServiceProviderFactory implements ServiceProviderFactory, It
         this.providers = new ConcurrentHashMap<String, ServiceProvider>();
     }
     // endregion
-
 
     // region 单例属性
     public static ServiceProviderFactory getInstance() {
@@ -67,7 +67,6 @@ public class DefaultServiceProviderFactory implements ServiceProviderFactory, It
 
     }
     //endregion
-
 
     // region 公共方法
     public void register(String name, ServiceProvider provider) {

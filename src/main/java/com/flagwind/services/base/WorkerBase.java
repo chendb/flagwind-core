@@ -1,6 +1,9 @@
-package com.flagwind.services;
+package com.flagwind.services.base;
 
 import com.flagwind.events.EventProvider;
+import com.flagwind.services.Worker;
+import com.flagwind.services.WorkerState;
+import com.flagwind.services.WorkerStateChangedEventArgs;
 
 public abstract class WorkerBase extends EventProvider implements Worker {
 

@@ -3,17 +3,19 @@ package com.flagwind.commands;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class CommandCollection implements Iterable<Map.Entry<String, Command>>{
+/**
+ * 命令集合
+ */
+public class CommandCollection implements Iterable<Map.Entry<String, Command>> {
 
-    private Map<String, Command> items ;
+    private Map<String, Command> items;
 
     /**
      * 获取命令的总数量。
      * @property
      * @returns number
      */
-    public int size()
-    {
+    public int size() {
         return this.items.size();
     }
 
@@ -34,15 +36,12 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>>{
     /**
      * 将一个命令实例挂载至指定的的路径。
      * @summary 如果指定的路径已存在命令将会抛出异常。
-     * @param  {string} path 路径字符串。
-     * @param  {ICommand} command 命令。
-     * @returns void
+     * @param  path 路径字符串。
+     * @param  command 命令。
      */
-    public void add(String path, Command command )
-    {
-        if(this.items.containsKey(path))
-        {
-            throw new IllegalArgumentException(String.format("The command path '%s' is existed.",path));
+    public void add(String path, Command command) {
+        if (this.items.containsKey(path)) {
+            throw new IllegalArgumentException(String.format("The command path '%s' is existed.", path));
         }
 
         this.items.put(path, command);
@@ -50,22 +49,18 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>>{
 
     /**
      * 移除指定路径的命令。
-     * @param  {string} path 路径字符串。
-     * @returns boolean
+     * @param  path 路径字符串。
      */
-    public boolean remove(String path)
-    {
-         this.items.remove((Object)path);
-         return true;
+    public boolean remove(String path) {
+        this.items.remove((Object) path);
+        return true;
     }
 
     /**
      * 根据指定的路径获取一个命令。
-     * @param  {string} path 路径字符串。
-     * @returns string
+     * @param  path 路径字符串。
      */
-    public Command find(String path)
-    {
+    public Command find(String path) {
         Command command = this.items.get(path);
 
         return command;
@@ -73,14 +68,10 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>>{
 
     /**
      * 检测是否包含指定的路径的命令。
-     * @param  {string} path
-     * @returns boolean
+     * @param  path
      */
-    public boolean contains(String path)
-    {
+    public boolean contains(String path) {
         return this.items.containsKey(path);
     }
-
-
 
 }

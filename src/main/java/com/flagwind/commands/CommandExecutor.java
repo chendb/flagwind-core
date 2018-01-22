@@ -1,7 +1,5 @@
 package com.flagwind.commands;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +11,10 @@ import java.util.Map;
  * @date 2016年12月9日 上午9:29:56
  */
 public class CommandExecutor {
-    private CommandCollection commands ;                               // 命令存储容器
-    private CommandExpressionParser parser ;                           // 命令解析器
-    private static CommandExecutor _default ;                          // 默认静态实例
+
+    private CommandCollection commands; // 命令存储容器
+    private CommandExpressionParser parser; // 命令解析器
+    private static CommandExecutor _default; // 默认静态实例
 
     public CommandExecutor(CommandExpressionParser parser) {
         this.parser = parser == null ? CommandExpressionParser.Instance : parser;
@@ -38,8 +37,8 @@ public class CommandExecutor {
     }
 
     public static CommandExecutor getDefault() {
-        if(_default==null){
-            _default=new CommandExecutor(null);
+        if (_default == null) {
+            _default = new CommandExecutor(null);
         }
         return _default;
     }
@@ -48,7 +47,6 @@ public class CommandExecutor {
         CommandExecutor._default = _default;
     }
 
-
     /**
      * 注册一个命令。
      * 注意: 如果路径已存在，则会抛出一个异常。
@@ -56,8 +54,7 @@ public class CommandExecutor {
      * @param  {ICommand} command 命令实例。
      * @returns void
      */
-    public void register(String path,Command command)
-    {
+    public void register(String path, Command command) {
         this.commands.add(path, command);
     }
 
@@ -66,8 +63,7 @@ public class CommandExecutor {
      * @param  {string} path
      * @returns boolean
      */
-    public boolean remove(String path)
-    {
+    public boolean remove(String path) {
         return this.commands.remove(path);
     }
 
@@ -76,8 +72,7 @@ public class CommandExecutor {
      * @param  {string} path 路径字符串。
      * @returns ICommand
      */
-    public Command find(String path)
-    {
+    public Command find(String path) {
         return this.commands.find(path);
     }
 
@@ -85,31 +80,25 @@ public class CommandExecutor {
      * 执行命令。
      * @summary 暂不支持表达式，commandText 仅为命令路径。
      * @async
-     * @param  {string} commandText 指定要执行的命令表达式文本。
-     * @param  {any} parameter 指定的输入参数。
+     * @param  commandText 指定要执行的命令表达式文本。
+     * @param  parameter 指定的输入参数。
      * @returns any 返回命令执行的结果。
      */
-    public Object  execute(String commandText,Object parameter)
-    {
-        if(commandText==null)
-        {
+    public Object execute(String commandText, Object parameter) {
+        if (commandText == null) {
             throw new IllegalArgumentException();
         }
 
         CommandExecutorContext context = null;
 
-        try
-        {
+        try {
             // 创建命令执行器上下文
             context = this.createExecutorContext(commandText, parameter);
 
-            if(context==null)
-            {
+            if (context == null) {
                 throw new CommandException("Create executor context failed.");
             }
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
 
             return null;
         }
@@ -126,20 +115,18 @@ public class CommandExecutor {
      * @param  {CommandExecutorContext} context 命令执行上下文。
      * @returns any
      */
-    protected Object onExecute(CommandExecutorContext context)
-    {
-        Map<CommandExpression,Command> entries = new HashMap<>();
-          CommandExpression  expression = context.getExpression();
+    protected Object onExecute(CommandExecutorContext context) {
+        Map<CommandExpression, Command> entries = new HashMap<>();
+        CommandExpression expression = context.getExpression();
 
-        while(expression != null)
-        {
+        while (expression != null) {
             // 查找指定路径的命令节点
             Command command = this.find(expression.getFullPath());
 
             // 如果指定的路径不存在的则抛出异常
-            if(command==null)
-            {
-                throw new CommandException(String.format("The command path '%s' can not found.",expression.getFullPath()));
+            if (command == null) {
+                throw new CommandException(
+                        String.format("The command path '%s' can not found.", expression.getFullPath()));
             }
 
             // 将找到的命令表达式和对应的节点加入数组中
@@ -153,14 +140,11 @@ public class CommandExecutor {
         Object parameter = context.getParameter();
 
         // 如果列表为空，则返回空
-        if(entries.size() < 1)
-        {
+        if (entries.size() < 1) {
             return null;
         }
 
-        for(Map.Entry<CommandExpression,Command> entry: entries.entrySet())
-        {
-
+        for (Map.Entry<CommandExpression, Command> entry : entries.entrySet()) {
 
             // 执行命令
             parameter = this.executeCommand(context, entry.getKey(), entry.getValue(), parameter);
@@ -181,15 +165,13 @@ public class CommandExecutor {
      * @param  {any} parameter
      * @returns any
      */
-    protected Object executeCommand(CommandExecutorContext context ,CommandExpression expression ,Command command,Object parameter)
-    {
-        if(context==null || expression==null)
-        {
+    protected Object executeCommand(CommandExecutorContext context, CommandExpression expression, Command command,
+            Object parameter) {
+        if (context == null || expression == null) {
             throw new IllegalArgumentException();
         }
 
-        if(command==null)
-        {
+        if (command == null) {
             return null;
         }
 
@@ -206,14 +188,12 @@ public class CommandExecutor {
      * @param  {any} parameter
      * @returns CommandExecutorContext
      */
-    protected CommandExecutorContext createExecutorContext(String commandText, Object parameter)
-    {
+    protected CommandExecutorContext createExecutorContext(String commandText, Object parameter) {
         // 解析当前命令文本
         CommandExpression expression = this.onParse(commandText);
 
-        if(expression==null)
-        {
-            throw new CommandException(String.format("Invalid command expression text: %s.",commandText));
+        if (expression == null) {
+            throw new CommandException(String.format("Invalid command expression text: %s.", commandText));
         }
 
         return new CommandExecutorContext(this, expression, parameter);
@@ -228,8 +208,7 @@ public class CommandExecutor {
      * @param  {any} parameter
      * @returns CommandContext
      */
-    protected CommandContext createCommandContext(CommandExpression expression ,Command command ,Object parameter)
-    {
+    protected CommandContext createCommandContext(CommandExpression expression, Command command, Object parameter) {
         return new CommandContext(this, expression, command, parameter);
     }
 
@@ -240,8 +219,7 @@ public class CommandExecutor {
      * @param  {string} text
      * @returns CommandExpression
      */
-    protected CommandExpression onParse(String text )
-    {
+    protected CommandExpression onParse(String text) {
         try {
             return this.parser.parse(text);
         } catch (IOException e) {

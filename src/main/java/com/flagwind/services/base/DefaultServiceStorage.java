@@ -1,13 +1,20 @@
-package com.flagwind.services;
+package com.flagwind.services.base;
 
-        import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
-        import java.util.*;
-        import java.util.concurrent.ConcurrentHashMap;
-        import java.util.concurrent.ConcurrentMap;
+import com.flagwind.services.ServiceEntry;
+import com.flagwind.services.ServiceProvider;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author hbche
+ * @author chendb
  */
 public class DefaultServiceStorage extends ServiceStorageBase implements Collection<ServiceEntry> {
 
@@ -22,7 +29,7 @@ public class DefaultServiceStorage extends ServiceStorageBase implements Collect
 
     public DefaultServiceStorage(ServiceProvider provider) {
         super(provider);
-        entries = new ArrayList<>();
+        this.entries = new ArrayList<>();
         namedEntries = new ConcurrentHashMap<String, ServiceEntry>();
     }
     // endregion

@@ -1,7 +1,9 @@
-package com.flagwind.application;
+package com.flagwind.application.base;
 
+import com.flagwind.application.ApplicationModule;
+import com.flagwind.application.Workbench;
 import com.flagwind.security.Principal;
-import com.flagwind.services.DefaultServiceProviderFactory;
+import com.flagwind.services.base.DefaultServiceProviderFactory;
 import com.flagwind.services.ServiceProviderFactory;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,12 +13,36 @@ import java.util.Set;
  * 表示实现该抽象类的是一个应用程序上下文
  */
 public abstract class ApplicationContextBase {
-    private String applicationId; // 应用程序唯一代号
-    private String title; // 应用程序标题
-    private Set<ApplicationModule> modules; // 应用程序的模块集合
-    private HashMap<String, Object> states; // 当前应用的状态字典
-    private Workbench workbench; // 工作台实例
-    private Principal principal; // 当前应用的安全主体
+
+    /**
+     * 应用程序唯一代号
+     */
+    private String applicationId;
+
+    /**
+     * 应用程序标题
+     */
+    private String title;
+
+    /**
+     * 应用程序的模块集合
+     */
+    private Set<ApplicationModule> modules;
+
+    /**
+     * 当前应用的状态字典
+     */
+    private HashMap<String, Object> states;
+
+    /**
+     * 工作台实例
+     */
+    private Workbench workbench;
+
+    /**
+     * 当前应用的安全主体
+     */
+    private Principal principal;
 
     /**
      * @return the applicationId
