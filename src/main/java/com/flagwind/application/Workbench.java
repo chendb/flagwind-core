@@ -27,26 +27,26 @@ public interface Workbench {
     /**
      * 打开工作台。
      * @param  {Array<string>} args
-     * @returns void
+     * 
      */
     void open(String...args);
 
     /**
      * 关闭工作台。
      * @async
-     * @returns boolean
+     * @return boolean
      */
     boolean close();
 
     /**
      * 取消激活工作台。
-     * @returns void
+     * 
      */
     void deactivate();
 
     /**
      * 激活工作台。
-     * @returns void
+     * 
      */
     void activate() ;
 }

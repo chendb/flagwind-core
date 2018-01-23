@@ -6,8 +6,11 @@ import com.flagwind.events.CancelEventArgs;
 import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
 import com.flagwind.services.ServiceProvider;
+import com.flagwind.services.ServiceProviderFactory;
 
 import java.util.function.Consumer;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author chendb
@@ -38,7 +41,7 @@ public class Application {
     * 获取一个事件提供程序实例。
     * @private
     * @property
-    * @returns IEventProvider
+    * @return IEventProvider
     */
     public static EventProvider getEventProvider() {
         if (eventProvider == null) {
@@ -60,6 +63,22 @@ public class Application {
      */
     public static ApplicationContextBase getContext() {
         return context;
+    }
+
+    public static ServiceProviderFactory getServiceFactory() {
+        ApplicationContextBase context = getContext();
+        if (context != null) {
+            return context.getServiceFactory();
+        }
+        return null;
+    }
+
+    public static ServiceProvider getServiceProvider(String name) {
+        ServiceProviderFactory factory = getServiceFactory();
+        if (factory != null) {
+            return StringUtils.isBlank(name) ? factory.getDefault() : factory.getProvider(name);
+        }
+        return null;
     }
 
     // endregion
@@ -92,7 +111,7 @@ public class Application {
      * @static
      * @param  {ApplicationContextBase} context 应用程序上下文实例。
      * @param  {Array<string>} args 启动参数。
-     * @returns void
+     * 
      */
     public static void start(ApplicationContextBase applicationContext, String... args) {
         if (applicationContext == null) {
@@ -149,7 +168,7 @@ public class Application {
     /**
      * 关闭当前应用程序。
      * @static
-     * @returns void
+     * 
      */
     public static void exit() {
 
@@ -184,12 +203,11 @@ public class Application {
         context = null;
     }
 
-    
     // endregion
 
     // region 对象获取
 
-   /**
+    /**
      * 根据名称与对象提供器解析对象
      * 
      * @param name 名称
@@ -200,7 +218,7 @@ public class Application {
      * @date 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name, String providerName) {
-        ServiceProvider provider = getContext().getServiceFactory().getProvider(providerName);
+        ServiceProvider provider = getServiceProvider(providerName);
         return provider.resolve(name);
     }
 
@@ -214,8 +232,16 @@ public class Application {
      * @date 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name) {
-        ServiceProvider provider = getContext().getServiceFactory().getDefault();
+        ServiceProvider provider = getServiceProvider(null);
         return provider.resolve(name);
+    }
+
+    /**
+     * 向容器中注册对象
+     */
+    public static void register(String name,Object service) {
+        ServiceProvider provider = getServiceProvider(null);
+        provider.register(name, service);
     }
 
     // endregion
@@ -233,7 +259,7 @@ public class Application {
     /**
     * 派发一个指定参数的事件。
     * @param  {EventArgs} eventArgs 事件参数实例。
-    * @returns void
+    * 
     */
     public static void dispatchEvent(EventArgs args) {
         getEventProvider().dispatchEvent(args);

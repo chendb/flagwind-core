@@ -20,7 +20,7 @@ public class EventProviderFactory {
     /**
      * 获取所有事件提供程序。
      * @property
-     * @returns IMap<any, IEventProvider>
+     * @return IMap<any, IEventProvider>
      */
     protected ConcurrentMap<Object, EventProvider> getProviders()
     {
@@ -31,7 +31,7 @@ public class EventProviderFactory {
      * 获取事件提供程序工厂的单实例。
      * @static
      * @property
-     * @returns EventProviderFactory
+     * @return EventProviderFactory
      */
     public static EventProviderFactory getInstance()
     {
@@ -47,8 +47,8 @@ public class EventProviderFactory {
 
     /**
      * 获取指定事件源的事件提供程序。
-     * @param  {any} source IEventProvider 所抛出事件对象的源对象。
-     * @returns EventProdiver 返回指定名称的事件提供程序。
+     * @param  source IEventProvider 所抛出事件对象的源对象。
+     * @return EventProdiver 返回指定名称的事件提供程序。
      */
     public EventProvider getProvider(Object source)
     {
@@ -71,9 +71,9 @@ public class EventProviderFactory {
 
     /**
      * 根据指定事件源创建一个事件提供程序。
-     * @virtual
-     * @param  {any} source IEventProvider 所抛出事件对象的源对象。
-     * @returns IEventProvider 事件提供程序实例。
+     * 
+     * @param  source IEventProvider 所抛出事件对象的源对象。
+     * @return IEventProvider 事件提供程序实例。
      */
     protected EventProvider createProvider(Object source){
         return new EventProvider(source);

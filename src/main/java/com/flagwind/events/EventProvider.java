@@ -27,11 +27,11 @@ public class EventProvider {
      * 为指定的事件类型注册一个侦听器，以使侦听器能够接收事件通知。
      * @summary 如果不再需要某个事件侦听器，可调用 removeListener() 删除它，否则会产生内存问题。
      * 由于垃圾回收器不会删除仍包含引用的对象，因此不会从内存中自动删除使用已注册事件侦听器的对象。
-     * @param  {string} type 事件类型。
+     * @param  type 事件类型。
      * @param  {Function} 处理事件的侦听器函数。
-     * @param  {any} scope? 侦听函数绑定的 this 对象。
+     * @param  scope? 侦听函数绑定的 this 对象。
      * @param  {boolean} once? 是否添加仅回调一次的事件侦听器，如果此参数设为 true 则在第一次回调时就自动移除监听。
-     * @returns void
+     * 
      */
     public void addListener(String type, Consumer<EventArgs> listener,Object scope,boolean once) {
         if (StringUtils.isEmpty(type) || listener == null) {
@@ -58,10 +58,10 @@ public class EventProvider {
 
     /**
      * 移除侦听器。如果没有注册任何匹配的侦听器，则对此方法的调用没有任何效果。
-     * @param  {string} type 事件类型。
+     * @param  type 事件类型。
      * @param  {Function} listener 处理事件的侦听器函数。
-     * @param  {any} scope? 侦听函数绑定的 this 对象。
-     * @returns void
+     * @param  scope? 侦听函数绑定的 this 对象。
+     * 
      */
     public void removeListener(String type,Consumer<EventArgs> listener,Object scope)
     {
@@ -97,8 +97,8 @@ public class EventProvider {
 
     /**
      * 检查是否为特定事件类型注册了侦听器。
-     * @param  {string} type 事件类型。
-     * @returns boolean 如果指定类型的侦听器已注册，则值为 true；否则，值为 false。
+     * @param  type 事件类型。
+     * @return boolean 如果指定类型的侦听器已注册，则值为 true；否则，值为 false。
      */
     public boolean hasListener(String type) {
         List<EventEntry<EventArgs>> entries = this.events.get(type);
@@ -108,9 +108,9 @@ public class EventProvider {
 
     /**
      * 派发一个指定类型的事件。
-     * @param  {string} type 事件类型。
-     * @param  {any} data? 事件数据。
-     * @returns void
+     * @param  type 事件类型。
+     * @param  data? 事件数据。
+     * 
      */
     public void dispatchEvent(String type,Object data) {
         // 参数匹配: type: string, data: any
@@ -121,15 +121,15 @@ public class EventProvider {
 
     /**
      * 派发一个指定参数的事件。
-     * @param  {EventArgs} eventArgs 事件参数实例。
-     * @returns void
+     * @param  eventArgs 事件参数实例。
+     * 
      */
-    public void dispatchEvent(EventArgs args ) {
+    public void dispatchEvent(EventArgs eventArgs ) {
         // 设置事件源
-        args.setSource(this.source);
+        eventArgs.setSource(this.source);
 
         // 根据事件类型获取所有事件项
-        List<EventEntry<EventArgs>> entries = this.events.get(args.getType());
+        List<EventEntry<EventArgs>> entries = this.events.get(eventArgs.getType());
 
         if (entries == null || entries.size() == 0) {
             return;
@@ -139,7 +139,7 @@ public class EventProvider {
         PriorityQueue<EventEntry> onces = new PriorityQueue<>();
 
         for (EventEntry entry : entries) {
-            entry.getListener().accept(args);
+            entry.getListener().accept(eventArgs);
             if (entry.once) {
                 onces.add(entry);
             }

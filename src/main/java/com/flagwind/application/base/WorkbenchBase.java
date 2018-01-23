@@ -270,9 +270,9 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
 
     /**
         * 当工作台失去焦点后调用。
-        * @protected
-        * @virtual
-        * @returns void
+        * 
+        * 
+        * 
         */
     protected void onDeactivated() {
         // 设置工作台的状态为"deactivated"
@@ -284,9 +284,9 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
 
     /**
     * 当工作台准备获得焦时调用。
-    * @protected
-    * @virtual
-    * @returns void
+    * 
+    * 
+    * 
     */
     protected void onActivating() {
         // 设置工作台的状态为"activating"
@@ -298,9 +298,9 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
 
     /**
      * 当工作台获得焦后调用。
-     * @protected
-     * @virtual
-     * @returns void
+     * 
+     * 
+     * 
      */
     protected void onActivated() {
         // 设置工作台的状态为"running"
@@ -314,9 +314,9 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
 
     /**
     * 当工作台标题更改后调用。
-    * @protected
-    * @virtual
-    * @returns void
+    * 
+    * 
+    * 
     */
     protected void onTitleChanged() {
         // 激发工作台"titleChanged"事件

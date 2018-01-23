@@ -150,7 +150,7 @@ public abstract class ApplicationContextBase {
      * 获取当前应用程序的服务管理对象。
      *
      * @property
-     * @returns IServiceProviderFactory
+     * @return IServiceProviderFactory
      */
     public ServiceProviderFactory getServiceFactory() {
         return DefaultServiceProviderFactory.getInstance();
@@ -166,7 +166,7 @@ public abstract class ApplicationContextBase {
      * 具体构建工作台子构件的最佳时机通常在 Workbench 类的 Open 方法内进行。
      *
      * @abstract
-     * @returns IWorkbench
+     * @return IWorkbench
      */
     protected abstract Workbench createWorkbench(String... args);
 

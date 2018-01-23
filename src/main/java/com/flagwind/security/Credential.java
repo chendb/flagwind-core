@@ -8,22 +8,22 @@ import java.util.Date;
 public interface Credential {
         /**
          * 获取安全凭证编号。
-         * @member
-         * @returns string
+         * 
+         * @return string
          */
         String getCredentialId();
         
         /**
          * 获取安全凭证对应的用户编号。
-         * @member
-         * @returns string
+         * 
+         * @return string
          */
         String geUuserId() ;
 
         /**
          * 获取安全凭证的过期时间。
-         * @member
-         * @returns Date
+         * 
+         * @return Date
          */
         Date getExpires();
 }

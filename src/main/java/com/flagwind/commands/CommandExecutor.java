@@ -49,9 +49,9 @@ public class CommandExecutor {
     /**
      * 注册一个命令。
      * 注意: 如果路径已存在，则会抛出一个异常。
-     * @param  {string} path 命令路径。
-     * @param  {ICommand} command 命令实例。
-     * @returns void
+     * @param  path 命令路径。
+     * @param  command 命令实例。
+     * 
      */
     public void register(String path, Command command) {
         this.commands.add(path, command);
@@ -59,8 +59,8 @@ public class CommandExecutor {
 
     /**
      * 移除指定路径的命令。
-     * @param  {string} path
-     * @returns boolean
+     * @param  path
+     * @return boolean
      */
     public boolean remove(String path) {
         return this.commands.remove(path);
@@ -68,8 +68,8 @@ public class CommandExecutor {
 
     /**
      * 查找指定路径的命令。
-     * @param  {string} path 路径字符串。
-     * @returns ICommand
+     * @param  path 路径字符串。
+     * @return ICommand
      */
     public Command find(String path) {
         return this.commands.find(path);
@@ -78,10 +78,9 @@ public class CommandExecutor {
     /**
      * 执行命令。
      * @summary 暂不支持表达式，commandText 仅为命令路径。
-     * @async
      * @param  commandText 指定要执行的命令表达式文本。
      * @param  parameter 指定的输入参数。
-     * @returns any 返回命令执行的结果。
+     * @return any 返回命令执行的结果。
      */
     public Object execute(String commandText, Object parameter) {
         if (commandText == null) {
@@ -111,8 +110,8 @@ public class CommandExecutor {
     /**
      * 当执行命令时调用。
      * @async
-     * @param  {CommandExecutorContext} context 命令执行上下文。
-     * @returns any
+     * @param  context 命令执行上下文。
+     * @return any
      */
     protected Object onExecute(CommandExecutorContext context) {
         Map<CommandExpression, Command> entries = new HashMap<>();
@@ -155,14 +154,14 @@ public class CommandExecutor {
 
     /**
      * 执行命令。
-     * @protected
-     * @virtual
+     * 
+     * 
      * @async
-     * @param  {CommandExecutorContext} context
-     * @param  {CommandExpression} expression
-     * @param  {ICommand} command
-     * @param  {any} parameter
-     * @returns any
+     * @param  context
+     * @param  expression
+     * @param  command
+     * @param  parameter
+     * @return any
      */
     protected Object executeCommand(CommandExecutorContext context, CommandExpression expression, Command command,
             Object parameter) {
@@ -181,11 +180,11 @@ public class CommandExecutor {
 
     /**
      * 创建命令执行上下文实例。
-     * @protected
-     * @virtual
-     * @param  {string} commandText
-     * @param  {any} parameter
-     * @returns CommandExecutorContext
+     * 
+     * 
+     * @param  commandText
+     * @param  parameter
+     * @return CommandExecutorContext
      */
     protected CommandExecutorContext createExecutorContext(String commandText, Object parameter) {
         // 解析当前命令文本
@@ -200,12 +199,12 @@ public class CommandExecutor {
 
     /**
      * 创建命令上下文实例。
-     * @protected
-     * @virtual
-     * @param  {CommandExpression} expression
-     * @param  {ICommand} command
-     * @param  {any} parameter
-     * @returns CommandContext
+     * 
+     * 
+     * @param  expression
+     * @param  command
+     * @param  parameter
+     * @return CommandContext
      */
     protected CommandContext createCommandContext(CommandExpression expression, Command command, Object parameter) {
         return new CommandContext(this, expression, command, parameter);
@@ -213,10 +212,10 @@ public class CommandExecutor {
 
     /**
      * 当解析命令表达式时调用。
-     * @protected
-     * @virtual
-     * @param  {string} text
-     * @returns CommandExpression
+     * 
+     * 
+     * @param  text
+     * @return CommandExpression
      */
     protected CommandExpression onParse(String text) {
         try {

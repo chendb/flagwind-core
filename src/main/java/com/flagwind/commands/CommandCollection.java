@@ -13,7 +13,7 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>> {
     /**
      * 获取命令的总数量。
      * @property
-     * @returns number
+     * @return number
      */
     public int size() {
         return this.items.size();
