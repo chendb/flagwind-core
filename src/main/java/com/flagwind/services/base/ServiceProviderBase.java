@@ -247,8 +247,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
     //region 私有方法
     private void register(com.flagwind.services.ServiceEntry entry) {
         if (entry == null)
-            throw new InvalidOperationException(
-                    String.format("Can not register for the %s@%s", entry.name(), entry.getServiceType().getName()));
+            throw new InvalidOperationException("Can not register for the serviceEntry ,it is null");
 
         //将服务描述项保存到服务容器中
         this.storage.add(entry);

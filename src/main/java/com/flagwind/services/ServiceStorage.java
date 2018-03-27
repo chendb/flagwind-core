@@ -1,7 +1,5 @@
 package com.flagwind.services;
 
-import java.util.Iterator;
-
 public interface ServiceStorage extends Iterable<ServiceEntry>
 {
     /**

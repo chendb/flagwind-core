@@ -73,12 +73,12 @@ public abstract class WorkerBase extends EventProvider implements Worker {
             this.state = WorkerState.Running;
 
             // 激发“StateChanged”事件
-            this.onStateChanged(new WorkerStateChangedEventArgs(this.STATE_CHANGED, "start", WorkerState.Running, null));
+            this.onStateChanged(new WorkerStateChangedEventArgs(WorkerBase.STATE_CHANGED, "start", WorkerState.Running, null));
         } catch (Exception ex) {
             this.state = WorkerState.Stopped;
 
             // 激发“StateChanged”事件
-            this.onStateChanged(new WorkerStateChangedEventArgs(this.STATE_CHANGED, "start", WorkerState.Stopped, ex));
+            this.onStateChanged(new WorkerStateChangedEventArgs(WorkerBase.STATE_CHANGED, "start", WorkerState.Stopped, ex));
 
             throw ex;
         }

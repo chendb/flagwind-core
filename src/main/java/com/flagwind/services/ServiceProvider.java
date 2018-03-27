@@ -1,7 +1,5 @@
 package com.flagwind.services;
 
-import java.util.List;
-
 public interface ServiceProvider {
     /**
      * 获取服务仓储实例。

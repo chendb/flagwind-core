@@ -53,7 +53,7 @@ public class EventProvider {
             }
         }
 
-        entries.add(new EventEntry(type, listener, scope, once));
+        entries.add(new EventEntry<EventArgs>(type, listener, scope, once));
     }
 
     /**
@@ -136,9 +136,9 @@ public class EventProvider {
         }
 
         // 临时数组用于保存只回掉一次的事件项
-        PriorityQueue<EventEntry> onces = new PriorityQueue<>();
+        PriorityQueue<EventEntry<EventArgs>> onces = new PriorityQueue<>();
 
-        for (EventEntry entry : entries) {
+        for (EventEntry<EventArgs> entry : entries) {
             entry.getListener().accept(eventArgs);
             if (entry.once) {
                 onces.add(entry);
@@ -147,7 +147,7 @@ public class EventProvider {
 
         // 清除所有只回调一次的事件项
         while (onces.size() > 0) {
-            EventEntry entry = onces.poll();
+            EventEntry<EventArgs> entry = onces.poll();
 
             this.removeListener(entry.getType(), entry.getListener(), entry.getScope());
         }
