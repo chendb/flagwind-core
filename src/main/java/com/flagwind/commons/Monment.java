@@ -11,11 +11,11 @@ import java.util.Date;
  */
 public class Monment extends java.util.Date {
 
-    // region 构造函数
+    private static final long serialVersionUID = -5157189375568030873L;
+
+	// region 构造函数
     /**
      * 功能：用java.util.Date进行构造。
-     * @author 沙琪玛 QQ：862990787
-     * May 29, 2013 10:59:05 AM
      * @param date
      */
     public Monment(java.util.Date date) {
@@ -24,8 +24,6 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：用毫秒进行构造。
-     * @author 沙琪玛 QQ：862990787
-     * May 29, 2013 10:59:05 AM
      * @param timeInMillis
      */
     public Monment(long timeInMillis) {
@@ -34,14 +32,12 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：默认构造函数。
-     * @author 沙琪玛 QQ：862990787
-     * May 29, 2013 11:00:05 AM
      */
     public Monment() {
         super();
     }
 
-    public Monment(String dateStr,String format) {
+    public Monment(String dateStr, String format) {
         super(Monment.parseDate(dateStr, format).getTime());
     }
 
@@ -229,7 +225,7 @@ public class Monment extends java.util.Date {
      * @return
      */
     public boolean isAfter(Monment date) {
-        return this.diff(date, DatePart.Milliseconds) < 0;
+        return this.diff(date, DatePart.Milliseconds) > 0;
     }
 
     /**
@@ -238,7 +234,7 @@ public class Monment extends java.util.Date {
      * @return
      */
     public boolean isBefore(Monment date) {
-        return this.diff(date, DatePart.Milliseconds) > 0;
+        return this.diff(date, DatePart.Milliseconds) < 0;
     }
 
     /**
@@ -248,7 +244,7 @@ public class Monment extends java.util.Date {
      * @return
      */
     public boolean isBetween(Monment start, Monment end) {
-        return this.isAfter(start) && this.isBefore(end);
+        return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
     }
 
     // region 类型判断
@@ -650,5 +646,6 @@ public class Monment extends java.util.Date {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return (null == this) ? null : df.format(this);
     }
+
 
 }
