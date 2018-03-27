@@ -6,7 +6,7 @@
 		<version>7</version>
 	</parent>
 	<groupId>com.github.chendb</groupId>
-	<version>0.0.10-SNAPSHOT</version>
+	<version>0.0.10</version>
 	<artifactId>flagwind-core</artifactId>
 	<name>flagwind-core</name>
 	<properties>
@@ -107,6 +107,7 @@
 				</property>
 			</activation>
 			<build>
+			  <pluginManagement>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -126,6 +127,7 @@
 						</executions>
 					</plugin>
 				</plugins>
+			  </pluginManagement>
 			</build>
 		</profile>
 	</profiles>
