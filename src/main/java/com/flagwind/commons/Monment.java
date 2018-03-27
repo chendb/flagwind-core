@@ -225,7 +225,7 @@ public class Monment extends java.util.Date {
      * @return
      */
     public boolean isAfter(Monment date) {
-        return this.diff(date, DatePart.Milliseconds) > 0;
+        return this.diff(date, null) > 0;
     }
 
     /**
@@ -234,7 +234,7 @@ public class Monment extends java.util.Date {
      * @return
      */
     public boolean isBefore(Monment date) {
-        return this.diff(date, DatePart.Milliseconds) < 0;
+        return this.diff(date, null) < 0;
     }
 
     /**
@@ -333,23 +333,27 @@ public class Monment extends java.util.Date {
 
     public long diff(Monment time, DatePart part) {
         TimeSpan ts = new TimeSpan(this.getTime() - time.getTime());
+        if (part == null) {
+            return ts.totalMillisecond();
+        }
+
         switch (part) {
-        case Years:
-            return ts.getYears();
-        case Months:
-            return ts.getMonths();
-        case Days:
-            return ts.getDays();
-        case Hours:
-            return ts.getHours();
-        case Minutes:
-            return ts.getMinutes();
-        case Seconds:
-            return ts.getSeconds();
-        case Milliseconds:
-            return ts.getMillisecond();
-        default:
-            return ts.getMillisecond();
+            case Years:
+                return ts.getYears();
+            case Months:
+                return ts.getMonths();
+            case Days:
+                return ts.getDays();
+            case Hours:
+                return ts.getHours();
+            case Minutes:
+                return ts.getMinutes();
+            case Seconds:
+                return ts.getSeconds();
+            case Milliseconds:
+                return ts.getMillisecond();
+            default:
+                return ts.totalMillisecond();
         }
     }
 
@@ -645,6 +649,19 @@ public class Monment extends java.util.Date {
     public String toShortDate() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return (null == this) ? null : df.format(this);
+    }
+
+    public static void main(String[] args) {
+        Monment start = new Monment(System.currentTimeMillis() - 10000);
+        Monment current = new Monment();
+        Monment end = new Monment(System.currentTimeMillis() + 10000);
+        System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("current:" + current.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("end:" + end.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("start-end:" + start.diff(end, null));
+        System.out.println("start is after end:" + Boolean.toString(start.isAfter(end)));
+        System.out.println("start is before end:" + Boolean.toString(start.isBefore(end)));
+        System.out.println("current is between start and end:" + Boolean.toString(current.isBetween(start, end)));
     }
 
 
