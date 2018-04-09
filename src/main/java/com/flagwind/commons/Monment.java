@@ -13,7 +13,7 @@ public class Monment extends java.util.Date {
 
     private static final long serialVersionUID = -5157189375568030873L;
 
-	// region 构造函数
+    // region 构造函数
     /**
      * 功能：用java.util.Date进行构造。
      * @param date
@@ -46,7 +46,7 @@ public class Monment extends java.util.Date {
     // region 时间片段枚举
 
     public static enum DatePart {
-        Years, Months, Days, Hours, Minutes, Seconds, Milliseconds
+        Years, Months, Weeks, Days, Hours, Minutes, Seconds, Milliseconds
     }
 
     // endregion
@@ -280,6 +280,8 @@ public class Monment extends java.util.Date {
             return this.month(1).day(1).hour(0).minute(0).second(0).millisecond(0);
         case Months:
             return this.day(1).hour(0).minute(0).second(0).millisecond(0);
+        case Weeks:
+            return this.weekStart();
         case Days:
             return this.hour(0).minute(0).second(0).millisecond(0);
         case Hours:
@@ -304,6 +306,8 @@ public class Monment extends java.util.Date {
             return this.month(1).day(1).hour(0).minute(0).second(0).millisecond(0).addYears(1).addMilliseconds(-1);
         case Months:
             return this.day(1).hour(0).minute(0).second(0).millisecond(0).addMonths(1).addMilliseconds(-1);
+        case Weeks:
+            return this.weekEnd();
         case Days:
             return this.hour(0).minute(0).second(0).millisecond(0).addDays(1).addMilliseconds(-1);
         case Hours:
@@ -338,22 +342,22 @@ public class Monment extends java.util.Date {
         }
 
         switch (part) {
-            case Years:
-                return ts.getYears();
-            case Months:
-                return ts.getMonths();
-            case Days:
-                return ts.getDays();
-            case Hours:
-                return ts.getHours();
-            case Minutes:
-                return ts.getMinutes();
-            case Seconds:
-                return ts.getSeconds();
-            case Milliseconds:
-                return ts.getMillisecond();
-            default:
-                return ts.totalMillisecond();
+        case Years:
+            return ts.getYears();
+        case Months:
+            return ts.getMonths();
+        case Days:
+            return ts.getDays();
+        case Hours:
+            return ts.getHours();
+        case Minutes:
+            return ts.getMinutes();
+        case Seconds:
+            return ts.getSeconds();
+        case Milliseconds:
+            return ts.getMillisecond();
+        default:
+            return ts.totalMillisecond();
         }
     }
 
@@ -575,6 +579,34 @@ public class Monment extends java.util.Date {
     }
 
     /**
+     * 本周的开始时间
+     */
+    public Monment weekStart() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this);
+        int day_of_week = this.dayOfWeekInt();
+        c.add(Calendar.DATE, -day_of_week + 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        return new Monment(c.getTimeInMillis());
+    }
+
+    /**
+     * 本周的结束时间
+     */
+    public Monment weekEnd() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this);
+        int day_of_week = this.dayOfWeekInt();
+        c.add(Calendar.DATE, -day_of_week + 7);
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59);
+        c.set(Calendar.SECOND, 59);
+        return new Monment(c.getTimeInMillis());
+    }
+
+    /**
      * 得到当前所在自然月的第一天的开始,格式为长日期格式。例如：2012-03-01 00:00:00。
      * @return Date
      */
@@ -655,6 +687,8 @@ public class Monment extends java.util.Date {
         Monment start = new Monment(System.currentTimeMillis() - 10000);
         Monment current = new Monment();
         Monment end = new Monment(System.currentTimeMillis() + 10000);
+        System.out.println("week start:" + current.weekStart().toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("week end:" + current.weekEnd().toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("current:" + current.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("end:" + end.toString("yyyy-MM-dd HH:mm:ss"));
@@ -663,6 +697,5 @@ public class Monment extends java.util.Date {
         System.out.println("start is before end:" + Boolean.toString(start.isBefore(end)));
         System.out.println("current is between start and end:" + Boolean.toString(current.isBetween(start, end)));
     }
-
 
 }
