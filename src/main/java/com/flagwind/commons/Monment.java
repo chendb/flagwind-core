@@ -16,6 +16,7 @@ public class Monment extends java.util.Date {
     // region 构造函数
     /**
      * 功能：用java.util.Date进行构造。
+     * 
      * @param date
      */
     public Monment(java.util.Date date) {
@@ -24,6 +25,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：用毫秒进行构造。
+     * 
      * @param timeInMillis
      */
     public Monment(long timeInMillis) {
@@ -53,8 +55,8 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：转换为Calendar。
-     * @author 沙琪玛 QQ：862990787
-     * Aug 21, 2013 8:58:31 AM
+     * 
+     * @author 沙琪玛 QQ：862990787 Aug 21, 2013 8:58:31 AM
      * @return Calendar
      */
     public Calendar toCalendar() {
@@ -66,6 +68,7 @@ public class Monment extends java.util.Date {
     // region 年、月、日、时、分钞赋值
     /**
      * 功能：将当前日期的秒数进行重新设置。
+     * 
      * @author chendb
      * @param second 秒数
      * @return 设置后的日期
@@ -79,6 +82,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的秒数进行重新设置。
+     * 
      * @author chendb
      * @param millisecond 秒数
      * @return 设置后的日期
@@ -92,6 +96,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的分钟进行重新设置。
+     * 
      * @author chendb
      * @param minute 分钟数
      * @return 设置后的日期
@@ -105,6 +110,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的小时进行重新设置。
+     * 
      * @author chendb
      * @param hour 小时数 (24小时制)
      * @return 设置后的日期
@@ -118,6 +124,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的天进行重新设置。
+     * 
      * @author chendb
      * @param day 某一天
      * @return 设置后的日期
@@ -131,6 +138,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的月进行重新设置。
+     * 
      * @author chendb
      * @param month 某一月
      * @return 设置后的日期
@@ -144,6 +152,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：将当前日期的年进行重新设置。
+     * 
      * @author chendb
      * @param year 某一年
      * @return 设置后的日期
@@ -159,6 +168,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：得到当月有多少天。
+     * 
      * @author chendb
      * @return int
      */
@@ -171,9 +181,10 @@ public class Monment extends java.util.Date {
     // region 字符串转时间
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
+     * 
      * @author chendb
-     * @param dateStr 时间字符串
-     * @param  dataFormat 当前时间字符串的格式。
+     * @param dateStr    时间字符串
+     * @param dataFormat 当前时间字符串的格式。
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
      */
     public static Monment parseDate(String dateStr, SimpleDateFormat dataFormat) {
@@ -188,9 +199,10 @@ public class Monment extends java.util.Date {
 
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
+     * 
      * @author chendb
      * @param dateStr yyyy-MM-dd HH:mm:ss字符串
-     * @param format 时间格式如：yyyy-MM-dd HH:mm:ss
+     * @param format  时间格式如：yyyy-MM-dd HH:mm:ss
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
      */
     public static Monment parseDate(String dateStr, String format) {
@@ -200,6 +212,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
+     * 
      * @author chendb
      * @param dateStr yyyy-MM-dd HH:mm:ss字符串
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
@@ -211,6 +224,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 该月的天数
+     * 
      * @author chendb
      * @return
      */
@@ -221,6 +235,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 当时对象时间是否在指定时间之后
+     * 
      * @param date 要比较的时间
      * @return
      */
@@ -230,6 +245,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 当时对象时间是否在指定时间之前
+     * 
      * @param date 要比较的时间
      * @return
      */
@@ -239,8 +255,9 @@ public class Monment extends java.util.Date {
 
     /**
      * 是否在指定的区间之意
+     * 
      * @param start 开始时间
-     * @param end 结束时间
+     * @param end   结束时间
      * @return
      */
     public boolean isBetween(Monment start, Monment end) {
@@ -250,6 +267,7 @@ public class Monment extends java.util.Date {
     // region 类型判断
     /**
      * 是否是Moment对象
+     * 
      * @param date
      * @return
      */
@@ -259,6 +277,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 是否为Date对象
+     * 
      * @param date
      * @return
      */
@@ -271,6 +290,7 @@ public class Monment extends java.util.Date {
     // region 开始与结束时间
     /**
      * 开始时间
+     * 
      * @param part
      * @return
      */
@@ -297,6 +317,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 结束时间
+     * 
      * @param part
      * @return
      */
@@ -327,6 +348,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：计算两个时间的时间差。
+     * 
      * @author chendb
      * @param time 另一个时间。
      * @return Timespan 时间间隔
@@ -367,7 +389,8 @@ public class Monment extends java.util.Date {
 
     /**
      * 时间加法
-     * @param num 数据
+     * 
+     * @param num  数据
      * @param part 时间片段
      * @return
      */
@@ -377,7 +400,8 @@ public class Monment extends java.util.Date {
 
     /**
      * 时间加法
-     * @param num 数据
+     * 
+     * @param num  数据
      * @param part 时间片段
      * @return
      */
@@ -404,6 +428,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加毫秒数。
+     * 
      * @author chendb
      * @param milliseconds 正值时时间延后，负值时时间提前。
      * @return Date
@@ -417,6 +442,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加秒数。
+     * 
      * @author chendb
      * @param seconds 正值时时间延后，负值时时间提前。
      * @return Date
@@ -430,6 +456,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加分钟数。
+     * 
      * @author chendb
      * @param minutes 正值时时间延后，负值时时间提前。
      * @return Date
@@ -443,6 +470,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加小时数。
+     * 
      * @author chendb
      * @param hours 正值时时间延后，负值时时间提前。
      * @return Date
@@ -456,6 +484,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加天数。
+     * 
      * @author chendb
      * @param days 正值时时间延后，负值时时间提前。
      * @return Date
@@ -469,6 +498,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加月数。
+     * 
      * @author chendb
      * @param months 正值时时间延后，负值时时间提前。
      * @return Date
@@ -482,6 +512,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 功能：当前时间增加年数。注意遇到2月29日情况，系统会自动延后或者减少一天。
+     * 
      * @author chendb
      * @param years 正值时时间延后，负值时时间提前。
      * @return Date
@@ -498,6 +529,7 @@ public class Monment extends java.util.Date {
     // region 取值操作
     /**
      * 得到秒。格式：56<br/>
+     * 
      * @return int
      */
     public int seconds() {
@@ -506,6 +538,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到分钟。格式：56<br/>
+     * 
      * @return int
      */
     public int minutes() {
@@ -514,6 +547,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到小时。格式：23<br/>
+     * 
      * @return int
      */
     public int hours() {
@@ -523,6 +557,7 @@ public class Monment extends java.util.Date {
     /**
      * 得到日。格式：26<br/>
      * 注意：这里1日返回1,2日返回2。
+     * 
      * @return int
      */
     public int days() {
@@ -532,6 +567,7 @@ public class Monment extends java.util.Date {
     /**
      * 得到月。格式：5<br/>
      * 注意：这里1月返回1,2月返回2。
+     * 
      * @return int
      */
     public int months() {
@@ -540,6 +576,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到年。格式：2013
+     * 
      * @return int
      */
     public int years() {
@@ -548,6 +585,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到短时间。格式：12:01
+     * 
      * @return String
      */
     public String shortTime() {
@@ -556,6 +594,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到长时间。格式：12:01:01
+     * 
      * @return String
      */
     public String longTime() {
@@ -566,6 +605,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到今天的第一秒的时间。
+     * 
      * @author chendb
      * @return Date
      */
@@ -608,6 +648,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到当前所在自然月的第一天的开始,格式为长日期格式。例如：2012-03-01 00:00:00。
+     * 
      * @return Date
      */
     public Monment monthStart() {
@@ -618,6 +659,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到今天的最后一秒的时间。
+     * 
      * @return Date
      */
     public Monment dayEnd() {
@@ -632,6 +674,7 @@ public class Monment extends java.util.Date {
     /**
      * 根据日期得到星期几,得到数字。<br/>
      * 7, 1, 2, 3, 4, 5, 6
+     * 
      * @return Integer 如：6
      */
     public int dayOfWeekInt() {
@@ -646,7 +689,18 @@ public class Monment extends java.util.Date {
     }
 
     /**
+     * 获取一年的第几周
+     */
+    public int weekOfYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+        return weekOfYear;
+    }
+
+    /**
      * 将日期转换成长日期字符串 例如：2009-09-09 01:01:01
+     * 
      * @return String
      */
     public String toLongDate() {
@@ -657,6 +711,7 @@ public class Monment extends java.util.Date {
     /**
      * 将日期按照一定的格式进行格式化为字符串。<br/>
      * 例如想将时间格式化为2012-03-05 12:56 ,则只需要传入formate为yyyy-MM-dd HH:mm即可。
+     * 
      * @param formate 格式化格式，如：yyyy-MM-dd HH:mm
      * @return String 格式后的日期字符串。如果当前对象为null，则直接返回null。
      */
@@ -667,6 +722,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 得到某个时间的时间戳yyyyMMddHHmmss。
+     * 
      * @return String 如果当前对象为null，则直接返回null。
      */
     public String toTimestamp() {
@@ -676,6 +732,7 @@ public class Monment extends java.util.Date {
 
     /**
      * 将日期转换成短日期字符串,例如：2009-09-09。
+     * 
      * @return String ,如果当前对象为null，返回null。
      */
     public String toShortDate() {
@@ -687,6 +744,7 @@ public class Monment extends java.util.Date {
         Monment start = new Monment(System.currentTimeMillis() - 10000);
         Monment current = new Monment();
         Monment end = new Monment(System.currentTimeMillis() + 10000);
+        System.out.println("week of year:" + current.weekOfYear());
         System.out.println("week start:" + current.weekStart().toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("week end:" + current.weekEnd().toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
