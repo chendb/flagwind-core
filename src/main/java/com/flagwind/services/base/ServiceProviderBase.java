@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.flagwind.commons.StringUtils;
 import com.flagwind.events.CancelEventArgs;
+import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
 import com.flagwind.services.InvalidOperationException;
 import com.flagwind.services.ServiceBuilder;
@@ -11,7 +12,7 @@ import com.flagwind.services.ServiceEntry;
 import com.flagwind.services.ServiceProvider;
 import com.flagwind.services.ServiceStorage;
 
-public abstract class ServiceProviderBase extends EventProvider implements ServiceProvider {
+public abstract class ServiceProviderBase extends EventProvider<EventArgs> implements ServiceProvider {
 
     //region 事件声明
     public static final String REGISTERED = "registered";
@@ -108,7 +109,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
         com.flagwind.services.ServiceEntry entry = storage.remove(name);
 
         if (entry != null) {
-            this.dispatchEvent(UNREGISTERED, entry);
+            this.dispatchEvent(new EventArgs( UNREGISTERED, entry));
         }
     }
     //endregion
@@ -141,7 +142,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
             result = this.getService(entry);
 
         //激发“Resolved”事件
-        this.dispatchEvent(REGISTERED, result);
+        this.dispatchEvent(new EventArgs(REGISTERED, result));
 
         //返回解析的结果
         return result;
@@ -171,7 +172,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
             result = this.getService(entry);
 
         //激发“Resolved”事件
-        this.dispatchEvent(REGISTERED, result);
+        this.dispatchEvent(new EventArgs(REGISTERED, result));
 
         //返回解析的结果
         return result;
@@ -202,7 +203,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
         }
 
         //激发“Resolved”事件
-        this.dispatchEvent(RESOLVED, result);
+        this.dispatchEvent(new EventArgs(RESOLVED, result));
 
         //返回结果集
         return result;
@@ -253,7 +254,7 @@ public abstract class ServiceProviderBase extends EventProvider implements Servi
         this.storage.add(entry);
 
         //激发“Registered”事件
-        this.dispatchEvent(REGISTERED, entry);
+        this.dispatchEvent(new EventArgs(REGISTERED, entry));
     }
     //endregion
 }

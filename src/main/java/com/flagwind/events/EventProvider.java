@@ -12,10 +12,10 @@ import java.util.function.Consumer;
 /**
  * @author hbche
  */
-public class EventProvider {
+public class EventProvider<T extends EventArgs> {
 
     private Object source;                                               // 事件源
-    private ConcurrentMap<String, List<EventEntry<EventArgs>>> events;           // 事件监听器字典
+    private ConcurrentMap<String, List<EventEntry<T>>> events;           // 事件监听器字典
 
 
     public EventProvider(Object source) {
@@ -33,12 +33,12 @@ public class EventProvider {
      * @param  {boolean} once? 是否添加仅回调一次的事件侦听器，如果此参数设为 true 则在第一次回调时就自动移除监听。
      * 
      */
-    public void addListener(String type, Consumer<EventArgs> listener,Object scope,boolean once) {
+    public void addListener(String type, Consumer<T> listener,Object scope,boolean once) {
         if (StringUtils.isEmpty(type) || listener == null) {
             throw new IllegalArgumentException();
         }
 
-        List<EventEntry<EventArgs>> entries = this.events.get(type);
+        List<EventEntry<T>> entries = this.events.get(type);
 
         if (entries == null) {
             entries = new ArrayList<>();
@@ -46,14 +46,14 @@ public class EventProvider {
             this.events.put(type, entries);
         }
 
-        for (EventEntry<EventArgs> entry : entries) {
+        for (EventEntry<T> entry : entries) {
             // 防止添加重复的侦听函数
             if (entry.getListener().equals(listener) && entry.getScope().equals(scope)) {
                 return;
             }
         }
 
-        entries.add(new EventEntry<EventArgs>(type, listener, scope, once));
+        entries.add(new EventEntry<T>(type, listener, scope, once));
     }
 
     /**
@@ -63,14 +63,14 @@ public class EventProvider {
      * @param  scope? 侦听函数绑定的 this 对象。
      * 
      */
-    public void removeListener(String type,Consumer<EventArgs> listener,Object scope)
+    public void removeListener(String type,Consumer<T> listener,Object scope)
     {
         if(StringUtils.isEmpty(type) || listener==null)
         {
             throw new IllegalArgumentException();
         }
 
-        List<EventEntry<EventArgs>> entries = this.events.get(type);
+        List<EventEntry<T>> entries = this.events.get(type);
 
         if(entries==null||entries.size()==0)
         {
@@ -79,7 +79,7 @@ public class EventProvider {
 
         for(int i = 0, len = entries.size(); i < len; i++)
         {
-            EventEntry<EventArgs> entry = entries.get(i);
+            EventEntry<T> entry = entries.get(i);
 
             if(entry.getListener().equals(listener)&& entry.getScope().equals(scope))
             {
@@ -101,44 +101,43 @@ public class EventProvider {
      * @return boolean 如果指定类型的侦听器已注册，则值为 true；否则，值为 false。
      */
     public boolean hasListener(String type) {
-        List<EventEntry<EventArgs>> entries = this.events.get(type);
+        List<EventEntry<T>> entries = this.events.get(type);
 
         return entries != null && entries.size() > 0;
     }
 
-    /**
-     * 派发一个指定类型的事件。
-     * @param  type 事件类型。
-     * @param  data? 事件数据。
-     * 
-     */
-    public void dispatchEvent(String type,Object data) {
-        // 参数匹配: type: string, data: any
-        EventArgs args = new EventArgs(type, data);
-        this.dispatchEvent(args);
-
-    }
+    // /**
+    //  * 派发一个指定类型的事件。
+    //  * @param  type 事件类型。
+    //  * @param  data? 事件数据。
+    //  * 
+    //  */
+    // public void dispatchEvent(String type,Object data) {
+    //     // 参数匹配: type: string, data: any
+    //     EventArgs args = new EventArgs(type, data);
+    //     this.dispatchEvent(args);
+    // }
 
     /**
      * 派发一个指定参数的事件。
      * @param  eventArgs 事件参数实例。
      * 
      */
-    public void dispatchEvent(EventArgs eventArgs ) {
+    public void dispatchEvent(T eventArgs ) {
         // 设置事件源
         eventArgs.setSource(this.source);
 
         // 根据事件类型获取所有事件项
-        List<EventEntry<EventArgs>> entries = this.events.get(eventArgs.getType());
+        List<EventEntry<T>> entries = this.events.get(eventArgs.getType());
 
         if (entries == null || entries.size() == 0) {
             return;
         }
 
         // 临时数组用于保存只回掉一次的事件项
-        PriorityQueue<EventEntry<EventArgs>> onces = new PriorityQueue<>();
+        PriorityQueue<EventEntry<T>> onces = new PriorityQueue<>();
 
-        for (EventEntry<EventArgs> entry : entries) {
+        for (EventEntry<T> entry : entries) {
             entry.getListener().accept(eventArgs);
             if (entry.once) {
                 onces.add(entry);
@@ -147,7 +146,7 @@ public class EventProvider {
 
         // 清除所有只回调一次的事件项
         while (onces.size() > 0) {
-            EventEntry<EventArgs> entry = onces.poll();
+            EventEntry<T> entry = onces.poll();
 
             this.removeListener(entry.getType(), entry.getListener(), entry.getScope());
         }

@@ -3,6 +3,7 @@ package com.flagwind.application.base;
 import com.flagwind.application.Workbench;
 import com.flagwind.application.WorkbenchStatus;
 import com.flagwind.events.CancelEventArgs;
+import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 工作台基础类
  */
-public abstract class WorkbenchBase extends EventProvider implements Workbench {
+public abstract class WorkbenchBase extends EventProvider<EventArgs> implements Workbench {
 
 
     // region 成员变量
@@ -224,7 +225,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Opening;
 
         // 激发工作台"opening"事件
-        this.dispatchEvent(this.OPENING, null);
+        this.dispatchEvent(new EventArgs(this.OPENING, null));
     }
 
     public void onOpened() {
@@ -232,7 +233,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Running;
 
         // 激发工作台"opened"事件
-        this.dispatchEvent(this.OPENED, null);
+        this.dispatchEvent(new EventArgs(this.OPENED, null));
     }
 
     public void onClosing(CancelEventArgs event) {
@@ -248,7 +249,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Closed;
 
         // 激发工作台"closed"事件
-        this.dispatchEvent(this.CLOSED, null);
+        this.dispatchEvent(new EventArgs(this.CLOSED, null));
     }
 
     public abstract void onOpen(String[] args);
@@ -260,7 +261,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Deactivating;
 
         // 激发工作台"deactivating"事件
-        this.dispatchEvent(this.DEACTIVATING, null);
+        this.dispatchEvent(new EventArgs(this.DEACTIVATING, null));
     }
 
     @Override
@@ -279,7 +280,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Deactivated;
 
         // 激发工作台"deactivated"事件
-        this.dispatchEvent(this.DEACTIVATED, null);
+        this.dispatchEvent(new EventArgs(this.DEACTIVATED, null));
     }
 
     /**
@@ -293,7 +294,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
         this.status = WorkbenchStatus.Activating;
 
         // 激发工作台"activating"事件
-        this.dispatchEvent(this.ACTIVATING, null);
+        this.dispatchEvent(new EventArgs(this.ACTIVATING, null));
     }
 
     /**
@@ -320,7 +321,7 @@ public abstract class WorkbenchBase extends EventProvider implements Workbench {
     */
     protected void onTitleChanged() {
         // 激发工作台"titleChanged"事件
-        this.dispatchEvent(this.TITLE_CHANGED, null);
+        this.dispatchEvent(new EventArgs(this.TITLE_CHANGED, null));
     }
 
 }

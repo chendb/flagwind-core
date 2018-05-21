@@ -1,5 +1,6 @@
 package com.flagwind.commons;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,10 @@ public class Monment extends java.util.Date {
      * @param date
      */
     public Monment(java.util.Date date) {
+        super(date.getTime());
+    }
+
+    public Monment(Timestamp date) {
         super(date.getTime());
     }
 

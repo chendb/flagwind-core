@@ -1,11 +1,12 @@
 package com.flagwind.services.base;
 
+import com.flagwind.events.EventArgs;
 import com.flagwind.events.EventProvider;
 import com.flagwind.services.Worker;
 import com.flagwind.services.WorkerState;
 import com.flagwind.services.WorkerStateChangedEventArgs;
 
-public abstract class WorkerBase extends EventProvider implements Worker {
+public abstract class WorkerBase extends EventProvider<EventArgs> implements Worker {
 
     private String name;                                          // 工作器名称
     private WorkerState state;                                    // 工作器状态
@@ -214,7 +215,7 @@ public abstract class WorkerBase extends EventProvider implements Worker {
      * @param eventArgs
      */
     private void onStateChanged(WorkerStateChangedEventArgs eventArgs) {
-        this.dispatchEvent(STATE_CHANGED, eventArgs);
+        this.dispatchEvent(new EventArgs(STATE_CHANGED, eventArgs));
     }
 }
 
