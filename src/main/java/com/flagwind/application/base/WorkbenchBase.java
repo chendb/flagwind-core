@@ -22,56 +22,56 @@ public abstract class WorkbenchBase extends EventProvider<EventArgs> implements 
     /**
      * 当工作台正在打开时产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String OPENING = "opening";
 
     /**
      * 当工作台被打开后产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String OPENED = "opened";
 
     /**
      * 当工作台正在取消激活时产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String DEACTIVATING = "deactivating";
 
     /**
      * 当工作台取消激活后产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String DEACTIVATED = "deactivated";
 
     /**
      * 当工作台正在激活时产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String ACTIVATING = "activating";
 
     /**
      * 当工作台正在关闭时产生的事件。
      *
-     * @event CancelEventArgs
+     * event：CancelEventArgs
      */
     public final String CLOSING = "closing";
 
     /**
      * 当工作台被关闭后产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String CLOSED = "closed";
 
     /**
      * 当工作台标题被更改后产生的事件。
      *
-     * @event EventArgs
+     * event：EventArgs
      */
     public final String TITLE_CHANGED = "title_changed";
 

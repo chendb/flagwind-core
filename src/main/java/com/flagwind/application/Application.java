@@ -85,20 +85,20 @@ public class Application {
 
     // region 事件名称
     /**
-       * 当应用程序启动时产生的事件。
-       * @event ApplicationEventArgs
-       */
+     * 当应用程序启动时产生的事件。
+     * event：ApplicationEventArgs
+     */
     public static String STARTING = "starting";
 
     /**
      * 当应用程序启动后产生的事件。
-     * @event ApplicationEventArgs
+     * event：ApplicationEventArgs
      */
     public static String STARTED = "started";
 
     /**
      * 当应用程序即将退出时产生的事件。
-     * @event CancelEventArgs
+     * event：CancelEventArgs
      */
     public static String EXITING = "exiting";
 
@@ -215,7 +215,7 @@ public class Application {
      * @param <T> 解析对象类型
      * @return 解析后对象
      * @author chendb
-     * @date 2016年12月9日 上午9:22:58
+     * 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name, String providerName) {
         ServiceProvider provider = getServiceProvider(providerName);
@@ -229,7 +229,7 @@ public class Application {
      * @param <T> 解析对象类型
      * @return 解析后对象
      * @author chendb
-     * @date 2016年12月9日 上午9:22:58
+     * 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name) {
         ServiceProvider provider = getServiceProvider(null);

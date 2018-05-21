@@ -16,7 +16,7 @@ public abstract class WorkerBase extends EventProvider<EventArgs> implements Wor
     /**
      * 表示当工作器状态改变后产生的事件。
      *
-     * @event WorkerStateChangedEventArgs
+     * event：WorkerStateChangedEventArgs
      */
     public static final String STATE_CHANGED = "stateChanged";
 
