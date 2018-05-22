@@ -3,8 +3,8 @@ package com.flagwind.commons;
 /**
  * 时间戳
  * 
- * @author chendb hbchendb1985@hotmail
- * @date 2015年9月25日 下午5:58:38
+ * author：chendb hbchendb1985@hotmail
+ * date：2015年9月25日 下午5:58:38
  */
 public class TimeSpan {
 
@@ -147,8 +147,8 @@ public class TimeSpan {
      * 
      * @param ts 时间间隔
      * @return 是否等于
-     * @author chendb
-     * @date 2016年12月9日 上午12:11:25
+     * author：chendb
+     * date：2016年12月9日 上午12:11:25
      */
     public Boolean equals(TimeSpan ts) {
         return this.getDays() == ts.getDays() && this.getHours() == ts.getHours()
@@ -160,8 +160,8 @@ public class TimeSpan {
      * 
      * @param ts 时间间隔
      * @return 时间间隔
-     * @author chendb
-     * @date 2016年12月9日 上午12:12:12
+     * author：chendb
+     * date：2016年12月9日 上午12:12:12
      */
     public TimeSpan add(TimeSpan ts) {
         int ms = this.getMillisecond() + ts.getMillisecond();
@@ -197,8 +197,8 @@ public class TimeSpan {
      * 
      * @param ts 时间间隔
      * @return 时间间隔
-     * @author chendb
-     * @date 2016年12月9日 上午12:12:35
+     * author：chendb
+     * date：2016年12月9日 上午12:12:35
      */
     public TimeSpan subtract(TimeSpan ts) {
         long ms1 = this.getMillisecond();
@@ -235,8 +235,8 @@ public class TimeSpan {
      * 总小时数
      * 
      * @return 总小时数
-     * @author chendb
-     * @date 2016年12月9日 上午12:12:52
+     * author：chendb
+     * date：2016年12月9日 上午12:12:52
      */
     public long totalHours() {
         return (this.getDays() * 24) + this.getHours();
@@ -246,8 +246,8 @@ public class TimeSpan {
      * 总分钟数
      * 
      * @return 总分钟数
-     * @author chendb
-     * @date 2016年12月9日 上午12:13:10
+     * author：chendb
+     * date：2016年12月9日 上午12:13:10
      */
     public long totalMinutes() {
         return (((this.getDays() * 24) + this.getHours()) * 60) + this.getMinutes();
@@ -257,8 +257,8 @@ public class TimeSpan {
      * 总的钞数
      * 
      * @return 总的钞数
-     * @author chendb
-     * @date 2016年12月9日 上午12:13:32
+     * author：chendb
+     * date：2016年12月9日 上午12:13:32
      */
     public long totalSeconds() {
         return (((((this.getDays() * 24) + this.getHours()) * 60) + this.getMinutes()) * 60) + this.getSeconds();
@@ -268,8 +268,8 @@ public class TimeSpan {
      * 总的ms数
      * 
      * @return 总的ms数
-     * @author chendb
-     * @date 2016年12月9日 上午12:17:22
+     * author：chendb
+     * date：2016年12月9日 上午12:17:22
      */
     public long totalMillisecond() {
         return ((((((this.getDays() * 24) + this.getHours()) * 60) + this.getMinutes()) * 60) + this.getSeconds())

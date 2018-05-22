@@ -1,23 +1,21 @@
 package com.flagwind.commands;
 
-import com.flagwind.services.Matchable;
-import com.flagwind.services.Predication;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
+import com.flagwind.services.Predication;
 
 /**
  * 泛型命令基类
  * 
- * @author chendb
- * @date 2016年12月9日 上午9:30:29
- * @param <T>
+ * author：chendb
+ * date：2016年12月9日 上午9:30:29
+ * @param <TContext>
  */
-public abstract class CommandBase<T> implements Command<T>, Predication, Matchable {
+public abstract class CommandBase<TContext extends CommandContext> implements Command<TContext>, Predication<TContext> {
 
     // region 私有变量
     private boolean enabled;
-    private Predication predication;
+    private Predication<TContext> predication;
     private String name;
     // endregion
 
@@ -43,16 +41,16 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
         this.enabled = enabled;
     }
 
-    public Predication getPredication() {
+    public Predication<TContext> getPredication() {
         return predication;
     }
 
-    public void setPredication(Predication predication) {
+    public void setPredication(Predication<TContext> predication) {
         this.predication = predication;
     }
 
     @Override
-    public boolean canExecute(T parameter) {
+    public boolean canExecute(TContext parameter) {
         // 如果断言对象是空则返回是否可用变量的值
         if (predication == null) {
             return enabled;
@@ -67,7 +65,7 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
     // region 外部方法
 
     @Override
-    public final Object execute(T parameter) {
+    public final Object execute(TContext parameter) {
         // 在执行之前首先判断是否可以执行
         if (!this.canExecute(parameter)) {
             return null;
@@ -87,31 +85,19 @@ public abstract class CommandBase<T> implements Command<T>, Predication, Matchab
      * 
      * @param parameter 执行操作
      * @return 执行的返回结果
-     * @author chendb
-     * @date 2016年12月9日 上午10:33:53
+     * author：chendb
+     * date：2016年12月9日 上午10:33:53
      */
-    public abstract Object onExecute(T parameter);
+    public abstract Object onExecute(TContext parameter);
 
     // }}
 
     // region 重载方法
+ 
+
     @Override
-    public boolean isMatch(Object parameter) {
-        if (parameter == null) {
-            return true;
-        }
-
-        if (parameter instanceof String) {
-            return StringUtils.equalsIgnoreCase((String) parameter, name);
-        }
-
-        return false;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public boolean predicate(Object parameter) {
-        return this.canExecute((T) parameter);
+    public boolean predicate(TContext parameter) {
+        return this.canExecute(parameter);
     }
 
     // }}

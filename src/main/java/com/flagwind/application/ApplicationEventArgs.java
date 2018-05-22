@@ -6,7 +6,7 @@ import com.flagwind.events.EventArgs;
 
 /**
  * 应用程序事件参数类。
- * @author chendb
+ * author：chendb
  */
 public class ApplicationEventArgs extends EventArgs {
     /**
@@ -18,7 +18,7 @@ public class ApplicationEventArgs extends EventArgs {
     /**
      * 初始化应用程序事件参数类的新实例。
      * @param  type 事件类型。
-     * @param  {ApplicationContextBase} context 应用程序上下文实例。
+     * @param  context 应用程序上下文实例。
      */
     public ApplicationEventArgs(String type, ApplicationContextBase context) {
         super(type, null);

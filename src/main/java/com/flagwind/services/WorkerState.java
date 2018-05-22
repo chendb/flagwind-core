@@ -3,8 +3,8 @@ package com.flagwind.services;
 /**
  * 工作者状态
  * 
- * @author chendb
- * @date 2016年12月9日 上午11:02:36
+ * author：chendb
+ * date：2016年12月9日 上午11:02:36
  */
 public enum WorkerState {
 

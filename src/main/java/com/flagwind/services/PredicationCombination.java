@@ -3,8 +3,8 @@ package com.flagwind.services;
 /**
  * 表示断言的逻辑组合方式。
  * 
- * @author chendb
- * @date 2016年12月9日 上午9:32:30
+ * author：chendb
+ * date：2016年12月9日 上午9:32:30
  */
 public enum PredicationCombination {
     /**

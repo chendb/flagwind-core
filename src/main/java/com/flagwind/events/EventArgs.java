@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 事件参数
  * 
- * @author chendb
- * @date 2015年10月5日 下午4:33:47
+ * author：chendb
+ * date：2015年10月5日 下午4:33:47
  */
 public class EventArgs {
 
@@ -34,9 +34,8 @@ public class EventArgs {
 
     /**
      * 初始化 EventArgs 类的新实例。
-     * @constructor
      * @param  type 事件类型。
-     * @param  {any?} data 可选数据。
+     * @param  data 可选数据。
      */
     public EventArgs(String type, Object data) {
         if(StringUtils.isEmpty(type))

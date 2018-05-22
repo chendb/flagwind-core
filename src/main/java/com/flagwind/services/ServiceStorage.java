@@ -4,7 +4,7 @@ public interface ServiceStorage extends Iterable<ServiceEntry>
 {
     /**
      * 添加一个服务项至仓储中。
-     * @param  {ServiceEntry} entry 服务项实例。
+     * @param  entry 服务项实例。
      * 
      */
    boolean add(ServiceEntry entry);
@@ -30,14 +30,14 @@ public interface ServiceStorage extends Iterable<ServiceEntry>
     ServiceEntry get( String name) ;
     /**
      * 获取指定服务类型对应的服务项实例。
-     * @param  {Function|string} serviceType 服务类型。
+     * @param  serviceType 服务类型。
      * @return ServiceEntry 服务项实例。
      */
     ServiceEntry  get(Class<?> serviceType);
 
     /**
      * 获取指定服务类型的所有服务项实例。
-     * @param  {Function} serviceType 服务类型。
+     * @param serviceType 服务类型。
      * @return Iterable<ServiceEntry> 服务项列表。
      */
     Iterable<ServiceEntry> getAll(Class<?> serviceType) ;

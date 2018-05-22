@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.flagwind.commons.ConverterUtils;
+
 /**
  * 泛型命令接口
  *
- * @author chendb
+ * author：chendb
  */
 public class CommandExecutor {
 
@@ -47,19 +49,20 @@ public class CommandExecutor {
     }
 
     /**
-     * 注册一个命令。
-     * 注意: 如果路径已存在，则会抛出一个异常。
-     * @param  path 命令路径。
-     * @param  command 命令实例。
+     * 注册一个命令。 注意: 如果路径已存在，则会抛出一个异常。
+     * 
+     * @param path    命令路径。
+     * @param command 命令实例。
      * 
      */
-    public void register(String path, Command command) {
+    public void register(String path, Command<?> command) {
         this.commands.add(path, command);
     }
 
     /**
      * 移除指定路径的命令。
-     * @param  path
+     * 
+     * @param path
      * @return boolean
      */
     public boolean remove(String path) {
@@ -68,18 +71,20 @@ public class CommandExecutor {
 
     /**
      * 查找指定路径的命令。
-     * @param  path 路径字符串。
+     * 
+     * @param path 路径字符串。
      * @return ICommand
      */
-    public Command find(String path) {
+    public Command<?> find(String path) {
         return this.commands.find(path);
     }
 
     /**
      * 执行命令。
-     * @summary 暂不支持表达式，commandText 仅为命令路径。
-     * @param  commandText 指定要执行的命令表达式文本。
-     * @param  parameter 指定的输入参数。
+     * 
+     * summary: 暂不支持表达式，commandText 仅为命令路径。
+     * @param commandText 指定要执行的命令表达式文本。
+     * @param parameter   指定的输入参数。
      * @return any 返回命令执行的结果。
      */
     public Object execute(String commandText, Object parameter) {
@@ -109,17 +114,17 @@ public class CommandExecutor {
 
     /**
      * 当执行命令时调用。
-     * @async
-     * @param  context 命令执行上下文。
+     * 
+     * @param context 命令执行上下文。
      * @return any
      */
     protected Object onExecute(CommandExecutorContext context) {
-        Map<CommandExpression, Command> entries = new HashMap<>();
+        Map<CommandExpression, Command<?>> entries = new HashMap<>();
         CommandExpression expression = context.getExpression();
 
         while (expression != null) {
             // 查找指定路径的命令节点
-            Command command = this.find(expression.getFullPath());
+            Command<?> command = this.find(expression.getFullPath());
 
             // 如果指定的路径不存在的则抛出异常
             if (command == null) {
@@ -142,7 +147,7 @@ public class CommandExecutor {
             return null;
         }
 
-        for (Map.Entry<CommandExpression, Command> entry : entries.entrySet()) {
+        for (Map.Entry<CommandExpression, Command<?>> entry : entries.entrySet()) {
 
             // 执行命令
             parameter = this.executeCommand(context, entry.getKey(), entry.getValue(), parameter);
@@ -155,15 +160,13 @@ public class CommandExecutor {
     /**
      * 执行命令。
      * 
-     * 
-     * @async
-     * @param  context
-     * @param  expression
-     * @param  command
-     * @param  parameter
+     * @param context
+     * @param expression
+     * @param command
+     * @param parameter
      * @return any
      */
-    protected Object executeCommand(CommandExecutorContext context, CommandExpression expression, Command command,
+    protected Object executeCommand(CommandExecutorContext context, CommandExpression expression, Command<?> command,
             Object parameter) {
         if (context == null || expression == null) {
             throw new IllegalArgumentException();
@@ -173,7 +176,10 @@ public class CommandExecutor {
             return null;
         }
 
-        Object result = command.execute(this.createCommandContext(expression, command, parameter));
+        Object comandContext = this.createCommandContext(expression, command, parameter);
+        Command<Object> cmd = ConverterUtils.cast(command);
+
+		Object result =cmd.execute(comandContext);
 
         return result;
     }
@@ -182,8 +188,8 @@ public class CommandExecutor {
      * 创建命令执行上下文实例。
      * 
      * 
-     * @param  commandText
-     * @param  parameter
+     * @param commandText
+     * @param parameter
      * @return CommandExecutorContext
      */
     protected CommandExecutorContext createExecutorContext(String commandText, Object parameter) {
@@ -201,12 +207,12 @@ public class CommandExecutor {
      * 创建命令上下文实例。
      * 
      * 
-     * @param  expression
-     * @param  command
-     * @param  parameter
+     * @param expression
+     * @param command
+     * @param parameter
      * @return CommandContext
      */
-    protected CommandContext createCommandContext(CommandExpression expression, Command command, Object parameter) {
+    protected CommandContext createCommandContext(CommandExpression expression, Command<?> command, Object parameter) {
         return new CommandContext(this, expression, command, parameter);
     }
 
@@ -214,7 +220,7 @@ public class CommandExecutor {
      * 当解析命令表达式时调用。
      * 
      * 
-     * @param  text
+     * @param text
      * @return CommandExpression
      */
     protected CommandExpression onParse(String text) {

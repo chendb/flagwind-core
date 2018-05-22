@@ -5,21 +5,21 @@ package com.flagwind.services;
 public interface Worker {
     /**
      * 获取当前工作器的名称。
-     * @return
+     * @return String
      */
     String getName();
 
 
     /**
      * 获取当前工作器的状态
-     * @return
+     * @return WorkerState
      */
     WorkerState getState();
 
 
     /**
      * 获取是否禁用工作器
-     * @return
+     * @return boolean
      */
     boolean getDisabled();
 
@@ -32,7 +32,7 @@ public interface Worker {
 
     /**
      * 获取工作器是否允许暂停和继续
-     * @return
+     * @return boolean
      */
     boolean canPauseAndContinue();
 

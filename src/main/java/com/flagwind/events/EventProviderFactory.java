@@ -12,8 +12,6 @@ public class EventProviderFactory {
 
     /**
      * 初始化事件提供程序工厂的新实例。
-     * 
-     * @constructor
      */
     public EventProviderFactory() {
         providers = new ConcurrentHashMap<>();
@@ -23,7 +21,7 @@ public class EventProviderFactory {
     /**
      * 获取所有事件提供程序。
      * 
-     * @property
+     * 
      * @return IMap<any, IEventProvider>
      */
     protected ConcurrentMap<Object, EventProvider<?>> getProviders() {
@@ -33,8 +31,8 @@ public class EventProviderFactory {
     /**
      * 获取事件提供程序工厂的单实例。
      * 
-     * @static
-     * @property
+     * 
+     * 
      * @return EventProviderFactory
      */
     public static EventProviderFactory getInstance() {

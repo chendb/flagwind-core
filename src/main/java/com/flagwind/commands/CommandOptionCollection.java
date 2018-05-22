@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 /**
  * 命令参数
- * @author chendb
+ * author：chendb
  */
 public class CommandOptionCollection implements Iterable<Entry<String, String>> {
 

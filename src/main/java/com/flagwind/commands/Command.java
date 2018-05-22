@@ -3,8 +3,8 @@ package com.flagwind.commands;
 /**
  * 泛型命令接口
  * 
- * @author chendb
- * @date 2016年12月9日 上午9:29:56
+ * author：chendb
+ * date：2016年12月9日 上午9:29:56
  * @param <T>
  */
 public interface Command<T> {
@@ -13,8 +13,8 @@ public interface Command<T> {
      * 命令名
      * 
      * @return 名称
-     * @author chendb
-     * @date 2016年12月9日 上午10:28:02
+     * author：chendb
+     * date：2016年12月9日 上午10:28:02
      */
     String getName();
 
@@ -22,8 +22,8 @@ public interface Command<T> {
      * 获取启动属性
      * 
      * @return 返回执行结果
-     * @author chendb
-     * @date 2016年12月9日 上午10:29:20
+     * author：chendb
+     * date：2016年12月9日 上午10:29:20
      */
     boolean getEnabled();
 
@@ -31,8 +31,8 @@ public interface Command<T> {
      * 设置启用属性
      * 
      * @param enabled 是否启用
-     * @author chendb
-     * @date 2016年12月9日 上午10:29:34
+     * author：chendb
+     * date：2016年12月9日 上午10:29:34
      */
     void setEnabled(boolean enabled);
 
@@ -41,8 +41,8 @@ public interface Command<T> {
      * 
      * @param parameter 判断命令能否执行的参数对象
      * @return 返回能否执行的结果
-     * @author chendb
-     * @date 2016年12月9日 上午10:26:18
+     * author：chendb
+     * date：2016年12月9日 上午10:26:18
      */
     boolean canExecute(T parameter);
 
@@ -51,8 +51,8 @@ public interface Command<T> {
      * 
      * @param parameter 执行命令的参数对象
      * @return 返回执行的返回结果
-     * @author chendb
-     * @date 2016年12月9日 上午10:26:55
+     * author：chendb
+     * date：2016年12月9日 上午10:26:55
      */
     Object execute(T parameter);
 }

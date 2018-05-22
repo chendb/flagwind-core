@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author chendb
+ * author：chendb
  */
 public class Application {
 
@@ -32,18 +32,18 @@ public class Application {
     /**
      * 事件提供程序
      */
-    private static EventProvider eventProvider;
+    private static EventProvider<EventArgs> eventProvider;
 
     // endregion
 
     // region 公共属性
     /**
     * 获取一个事件提供程序实例。
-    * @private
-    * @property
+    * 
+    * 
     * @return IEventProvider
     */
-    public static EventProvider getEventProvider() {
+    public static EventProvider<EventArgs> getEventProvider() {
         if (eventProvider == null) {
             eventProvider = new EventProvider(null);
         }
@@ -108,9 +108,9 @@ public class Application {
 
     /**
      * 启动应用程序。
-     * @static
-     * @param  {ApplicationContextBase} context 应用程序上下文实例。
-     * @param  {Array<string>} args 启动参数。
+     * 
+     * @param  applicationContext 应用程序上下文实例。
+     * @param  args 启动参数。
      * 
      */
     public static void start(ApplicationContextBase applicationContext, String... args) {
@@ -167,7 +167,7 @@ public class Application {
 
     /**
      * 关闭当前应用程序。
-     * @static
+     * 
      * 
      */
     public static void exit() {
@@ -214,7 +214,7 @@ public class Application {
      * @param providerName 对象提供器解析
      * @param <T> 解析对象类型
      * @return 解析后对象
-     * @author chendb
+     * author：chendb
      * 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name, String providerName) {
@@ -228,7 +228,7 @@ public class Application {
      * @param name 名称
      * @param <T> 解析对象类型
      * @return 解析后对象
-     * @author chendb
+     * author：chendb
      * 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name) {
@@ -258,11 +258,11 @@ public class Application {
 
     /**
     * 派发一个指定参数的事件。
-    * @param  {EventArgs} eventArgs 事件参数实例。
+    * @param eventArgs 事件参数实例。
     * 
     */
-    public static void dispatchEvent(EventArgs args) {
-        getEventProvider().dispatchEvent(args);
+    public static void dispatchEvent(EventArgs eventArgs) {
+        getEventProvider().dispatchEvent(eventArgs);
     }
 
     // endregion

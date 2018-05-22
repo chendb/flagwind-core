@@ -128,8 +128,7 @@ public class ConverterUtils {
     /**
      * <将对象转换为int>
      * 
-     * @param obj        需要转换为int的对象
-     * @param defaultVal 默认值
+     * @param obj  需要转换为int的对象
      * @return obj转换成的int值
      */
     public static Integer toInt(Object obj) {

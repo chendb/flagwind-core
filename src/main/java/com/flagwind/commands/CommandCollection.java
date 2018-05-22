@@ -6,13 +6,13 @@ import java.util.function.Consumer;
 /**
  * 命令集合
  */
-public class CommandCollection implements Iterable<Map.Entry<String, Command>> {
+public class CommandCollection implements Iterable<Map.Entry<String, Command<?>>> {
 
-    private Map<String, Command> items;
+    private Map<String, Command<?>> items;
 
     /**
      * 获取命令的总数量。
-     * @property
+     * 
      * @return number
      */
     public int size() {
@@ -24,22 +24,22 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>> {
     }
 
     @Override
-    public Iterator<Map.Entry<String, Command>> iterator() {
+    public Iterator<Map.Entry<String, Command<?>>> iterator() {
         return this.items.entrySet().iterator();
     }
 
     @Override
-    public void forEach(Consumer<? super Map.Entry<String, Command>> action) {
+    public void forEach(Consumer<? super Map.Entry<String, Command<?>>> action) {
         this.forEach(action);
     }
 
     /**
      * 将一个命令实例挂载至指定的的路径。
-     * @summary 如果指定的路径已存在命令将会抛出异常。
+     * summary: 如果指定的路径已存在命令将会抛出异常。
      * @param  path 路径字符串。
      * @param  command 命令。
      */
-    public void add(String path, Command command) {
+    public void add(String path, Command<?> command) {
         if (this.items.containsKey(path)) {
             throw new IllegalArgumentException(String.format("The command path '%s' is existed.", path));
         }
@@ -60,9 +60,8 @@ public class CommandCollection implements Iterable<Map.Entry<String, Command>> {
      * 根据指定的路径获取一个命令。
      * @param  path 路径字符串。
      */
-    public Command find(String path) {
-        Command command = this.items.get(path);
-
+    public Command<?> find(String path) {
+        Command<?> command = this.items.get(path);
         return command;
     }
 

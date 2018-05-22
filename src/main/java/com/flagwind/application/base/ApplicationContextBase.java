@@ -149,7 +149,7 @@ public abstract class ApplicationContextBase {
     /**
      * 获取当前应用程序的服务管理对象。
      *
-     * @property
+     * 
      * @return IServiceProviderFactory
      */
     public ServiceProviderFactory getServiceFactory() {
@@ -165,7 +165,6 @@ public abstract class ApplicationContextBase {
      * 通常子类中实现的该方法只是创建空的工作台对象，并没有构建出该工作台下面的子构件。
      * 具体构建工作台子构件的最佳时机通常在 Workbench 类的 Open 方法内进行。
      *
-     * @abstract
      * @return IWorkbench
      */
     protected abstract Workbench createWorkbench(String... args);

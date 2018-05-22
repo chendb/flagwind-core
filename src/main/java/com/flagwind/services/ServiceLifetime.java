@@ -1,7 +1,7 @@
 package com.flagwind.services;
 
 /**
- * @author hbche
+ * author：hbche
  */
 public interface ServiceLifetime{
 	boolean isAlive(ServiceEntry entry);

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 
 /**
- * @author hbche
+ * author：hbche
  */
 public class EventProvider<T extends EventArgs> {
 
@@ -25,12 +25,12 @@ public class EventProvider<T extends EventArgs> {
 
     /**
      * 为指定的事件类型注册一个侦听器，以使侦听器能够接收事件通知。
-     * @summary 如果不再需要某个事件侦听器，可调用 removeListener() 删除它，否则会产生内存问题。
+     * summary: 如果不再需要某个事件侦听器，可调用 removeListener() 删除它，否则会产生内存问题。
      * 由于垃圾回收器不会删除仍包含引用的对象，因此不会从内存中自动删除使用已注册事件侦听器的对象。
      * @param  type 事件类型。
-     * @param  {Function} 处理事件的侦听器函数。
-     * @param  scope? 侦听函数绑定的 this 对象。
-     * @param  {boolean} once? 是否添加仅回调一次的事件侦听器，如果此参数设为 true 则在第一次回调时就自动移除监听。
+     * @param  listener 处理事件的侦听器函数。
+     * @param  scope 侦听函数绑定的 this 对象。
+     * @param  once 是否添加仅回调一次的事件侦听器，如果此参数设为 true 则在第一次回调时就自动移除监听。
      * 
      */
     public void addListener(String type, Consumer<T> listener,Object scope,boolean once) {
@@ -59,8 +59,8 @@ public class EventProvider<T extends EventArgs> {
     /**
      * 移除侦听器。如果没有注册任何匹配的侦听器，则对此方法的调用没有任何效果。
      * @param  type 事件类型。
-     * @param  {Function} listener 处理事件的侦听器函数。
-     * @param  scope? 侦听函数绑定的 this 对象。
+     * @param listener 处理事件的侦听器函数。
+     * @param  scope 侦听函数绑定的 this 对象。
      * 
      */
     public void removeListener(String type,Consumer<T> listener,Object scope)

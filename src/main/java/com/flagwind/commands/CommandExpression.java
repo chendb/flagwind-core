@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 /**
  * 命令表达式类，提供命令的名称路径与参数选项等信息。
- * @author chendb
+ * author：chendb
  */
 public class CommandExpression {
 

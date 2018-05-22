@@ -2,7 +2,7 @@ package com.flagwind.commands;
 
 /**
  * 命令异常
- * @author chendb
+ * author：chendb
  */
 public class CommandException extends  RuntimeException {
 

@@ -3,7 +3,7 @@ package com.flagwind.commands;
 
 /**
  * 命令表达式异常
- * @author chendb
+ * author：chendb
  */
 public class CommandExpressionException extends  RuntimeException {
     

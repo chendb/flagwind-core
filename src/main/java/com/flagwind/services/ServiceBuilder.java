@@ -1,7 +1,7 @@
 package com.flagwind.services;
 
 /**
- * @author chendb
+ * author：chendb
  */
 public interface ServiceBuilder{
 	Object build(ServiceEntry entry);

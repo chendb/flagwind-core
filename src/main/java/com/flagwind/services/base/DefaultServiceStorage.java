@@ -14,7 +14,7 @@ import com.flagwind.services.ServiceProvider;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author chendb
+ * author：chendb
  */
 public class DefaultServiceStorage extends ServiceStorageBase implements Collection<ServiceEntry> {
 

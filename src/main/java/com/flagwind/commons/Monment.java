@@ -61,7 +61,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：转换为Calendar。
      * 
-     * @author 沙琪玛 QQ：862990787 Aug 21, 2013 8:58:31 AM
+     * author：沙琪玛 QQ：862990787 Aug 21, 2013 8:58:31 AM
      * @return Calendar
      */
     public Calendar toCalendar() {
@@ -74,7 +74,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的秒数进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param second 秒数
      * @return 设置后的日期
      */
@@ -88,7 +88,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的秒数进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param millisecond 秒数
      * @return 设置后的日期
      */
@@ -102,7 +102,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的分钟进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param minute 分钟数
      * @return 设置后的日期
      */
@@ -116,7 +116,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的小时进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param hour 小时数 (24小时制)
      * @return 设置后的日期
      */
@@ -130,7 +130,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的天进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param day 某一天
      * @return 设置后的日期
      */
@@ -144,7 +144,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的月进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param month 某一月
      * @return 设置后的日期
      */
@@ -158,7 +158,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：将当前日期的年进行重新设置。
      * 
-     * @author chendb
+     * author：chendb
      * @param year 某一年
      * @return 设置后的日期
      */
@@ -174,7 +174,7 @@ public class Monment extends java.util.Date {
     /**
      * 功能：得到当月有多少天。
      * 
-     * @author chendb
+     * author：chendb
      * @return int
      */
     public int dayOfMonth() {
@@ -187,7 +187,7 @@ public class Monment extends java.util.Date {
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
      * 
-     * @author chendb
+     * author：chendb
      * @param dateStr    时间字符串
      * @param dataFormat 当前时间字符串的格式。
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
@@ -205,7 +205,7 @@ public class Monment extends java.util.Date {
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
      * 
-     * @author chendb
+     * author：chendb
      * @param dateStr yyyy-MM-dd HH:mm:ss字符串
      * @param format  时间格式如：yyyy-MM-dd HH:mm:ss
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
@@ -218,7 +218,7 @@ public class Monment extends java.util.Date {
     /**
      * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
      * 
-     * @author chendb
+     * author：chendb
      * @param dateStr yyyy-MM-dd HH:mm:ss字符串
      * @return net.maxt.util.Date 日期 ,转换异常时返回null。
      */
@@ -230,8 +230,8 @@ public class Monment extends java.util.Date {
     /**
      * 该月的天数
      * 
-     * @author chendb
-     * @return
+     * author：chendb
+     * @return int
      */
     public int daysInMonth() {
         Calendar c = this.toCalendar();
@@ -242,7 +242,7 @@ public class Monment extends java.util.Date {
      * 当时对象时间是否在指定时间之后
      * 
      * @param date 要比较的时间
-     * @return
+     * @return boolean
      */
     public boolean isAfter(Monment date) {
         return this.diff(date, null) > 0;
@@ -252,7 +252,7 @@ public class Monment extends java.util.Date {
      * 当时对象时间是否在指定时间之前
      * 
      * @param date 要比较的时间
-     * @return
+     * @return boolean
      */
     public boolean isBefore(Monment date) {
         return this.diff(date, null) < 0;
@@ -263,7 +263,7 @@ public class Monment extends java.util.Date {
      * 
      * @param start 开始时间
      * @param end   结束时间
-     * @return
+     * @return boolean
      */
     public boolean isBetween(Monment start, Monment end) {
         return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
@@ -274,7 +274,7 @@ public class Monment extends java.util.Date {
      * 是否是Moment对象
      * 
      * @param date
-     * @return
+     * @return boolean
      */
     public boolean isMoment(Date date) {
         return date instanceof Monment;
@@ -284,7 +284,7 @@ public class Monment extends java.util.Date {
      * 是否为Date对象
      * 
      * @param date
-     * @return
+     * @return boolean
      */
     public boolean isDate(Date date) {
         return !(date instanceof Monment);
@@ -297,7 +297,7 @@ public class Monment extends java.util.Date {
      * 开始时间
      * 
      * @param part
-     * @return
+     * @return Monment
      */
     public Monment startOf(DatePart part) {
         switch (part) {
@@ -324,7 +324,7 @@ public class Monment extends java.util.Date {
      * 结束时间
      * 
      * @param part
-     * @return
+     * @return Monment
      */
     public Monment endOf(DatePart part) {
         switch (part) {
@@ -354,9 +354,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：计算两个时间的时间差。
      * 
-     * @author chendb
+     * author：chendb
      * @param time 另一个时间。
-     * @return Timespan 时间间隔
+     * @return TimeSpan 时间间隔
      */
     public TimeSpan diff(Monment time) {
         return new TimeSpan(this.getTime() - time.getTime());
@@ -397,7 +397,7 @@ public class Monment extends java.util.Date {
      * 
      * @param num  数据
      * @param part 时间片段
-     * @return
+     * @return Monment
      */
     public Monment substract(int num, DatePart part) {
         return this.add(-num, part);
@@ -408,7 +408,7 @@ public class Monment extends java.util.Date {
      * 
      * @param num  数据
      * @param part 时间片段
-     * @return
+     * @return Monment
      */
     public Monment add(int num, DatePart part) {
         switch (part) {
@@ -434,9 +434,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加毫秒数。
      * 
-     * @author chendb
+     * author：chendb
      * @param milliseconds 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addMilliseconds(int milliseconds) {
         Calendar c = Calendar.getInstance();
@@ -448,9 +448,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加秒数。
      * 
-     * @author chendb
+     * author：chendb
      * @param seconds 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addSeconds(int seconds) {
         Calendar c = Calendar.getInstance();
@@ -462,9 +462,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加分钟数。
      * 
-     * @author chendb
+     * author：chendb
      * @param minutes 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addMinutes(int minutes) {
         Calendar c = Calendar.getInstance();
@@ -476,9 +476,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加小时数。
      * 
-     * @author chendb
+     * author：chendb
      * @param hours 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addHours(int hours) {
         Calendar c = Calendar.getInstance();
@@ -490,9 +490,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加天数。
      * 
-     * @author chendb
+     * author：chendb
      * @param days 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addDays(int days) {
         Calendar c = Calendar.getInstance();
@@ -504,9 +504,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加月数。
      * 
-     * @author chendb
+     * author：chendb
      * @param months 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addMonths(int months) {
         Calendar c = Calendar.getInstance();
@@ -518,9 +518,9 @@ public class Monment extends java.util.Date {
     /**
      * 功能：当前时间增加年数。注意遇到2月29日情况，系统会自动延后或者减少一天。
      * 
-     * @author chendb
+     * author：chendb
      * @param years 正值时时间延后，负值时时间提前。
-     * @return Date
+     * @return Monment
      */
     public Monment addYears(int years) {
         Calendar c = Calendar.getInstance();
@@ -611,7 +611,7 @@ public class Monment extends java.util.Date {
     /**
      * 得到今天的第一秒的时间。
      * 
-     * @author chendb
+     * author：chendb
      * @return Date
      */
     public Monment dayStart() {

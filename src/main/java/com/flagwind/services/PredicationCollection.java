@@ -5,10 +5,10 @@ import java.util.ArrayList;
 /**
  * 断言集合
  * 
- * @author chendb
- * @date 2016年12月9日 上午9:31:51
+ * author：chendb
+ * date：2016年12月9日 上午9:31:51
  */
-public class PredicationCollection extends ArrayList<Predication> implements Predication {
+public class PredicationCollection<T> extends ArrayList<Predication<T>> implements Predication<T> {
 
     private static final long serialVersionUID = 6753896880041271740L;
 
@@ -42,7 +42,7 @@ public class PredicationCollection extends ArrayList<Predication> implements Pre
     /**
      * 构造函数
      * 
-     * @param combine 组合方式
+     * @param combination 组合方式
      */
     public PredicationCollection(PredicationCombination combination) {
         this.combination = combination;
@@ -53,13 +53,13 @@ public class PredicationCollection extends ArrayList<Predication> implements Pre
     // {{ 重载方法
 
     @Override
-    public boolean predicate(Object parameter) {
+    public boolean predicate(T parameter) {
 
         if (this.size() < 1) {
             return true;
         }
 
-        for (Predication p : this) {
+        for (Predication<T> p : this) {
             if (p.predicate(parameter)) {
                 if (combination == PredicationCombination.Or) {
                     return true;
