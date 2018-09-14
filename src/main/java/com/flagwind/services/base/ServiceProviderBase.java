@@ -2,6 +2,7 @@ package com.flagwind.services.base;
 
 import java.util.ArrayList;
 
+import com.flagwind.commons.ConverterUtils;
 import com.flagwind.commons.StringUtils;
 import com.flagwind.events.CancelEventArgs;
 import com.flagwind.events.EventArgs;
@@ -150,7 +151,7 @@ public abstract class ServiceProviderBase extends EventProvider<EventArgs> imple
 
     @Override
     public <T> T resolve(Class<?> type) {
-        return (T) this.resolve(type, null);
+        return ConverterUtils.cast(this.resolve(type, null));
     }
 
     public Object resolve(Class<?> type, Object parameter) {
@@ -179,7 +180,7 @@ public abstract class ServiceProviderBase extends EventProvider<EventArgs> imple
     }
 
     public <T> Iterable<T> resolveAll(Class<?> type) {
-        return (Iterable<T>) this.resolveAll(type, null);
+        return ConverterUtils.cast(this.resolveAll(type, null));
     }
 
     public Iterable<Object> resolveAll(Class<?> type, Object parameter) {
@@ -191,7 +192,7 @@ public abstract class ServiceProviderBase extends EventProvider<EventArgs> imple
         this.dispatchEvent(args);
 
         if (args.getCancel())
-            return (Iterable<Object>) args.getData();
+            return ConverterUtils.cast(args.getData());
 
         final ArrayList<Object> result = new ArrayList<>();
         Iterable<ServiceEntry> entries = this.storage.getAll(type);

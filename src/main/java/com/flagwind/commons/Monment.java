@@ -362,6 +362,14 @@ public class Monment extends java.util.Date {
         return new TimeSpan(this.getTime() - time.getTime());
     }
 
+    /**
+     * 取得两个时间的时间差的指定时段类型的数值
+     *  如：m1:2018-05-31 08：30：30, m2:2018-05-31 08：25:10
+     *  m1.diff(m2,DatePart.Hours) 为 0
+     *  m1.diff(m2,DatePart.Minutes) 为 5
+     *  m1.diff(m2,DatePart.Seconds) 为 5*60+20
+     */
+    @Deprecated
     public long diff(Monment time, DatePart part) {
         TimeSpan ts = new TimeSpan(this.getTime() - time.getTime());
         if (part == null) {
@@ -748,14 +756,18 @@ public class Monment extends java.util.Date {
     public static void main(String[] args) {
         Monment start = new Monment(System.currentTimeMillis() - 10000);
         Monment current = new Monment();
-        Monment end = new Monment(System.currentTimeMillis() + 10000);
+        Monment end = new Monment(System.currentTimeMillis() + 100000);
+        System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("end:" + end.toString("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("current:" + current.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("week of year:" + current.weekOfYear());
         System.out.println("week start:" + current.weekStart().toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("week end:" + current.weekEnd().toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("current:" + current.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("end:" + end.toString("yyyy-MM-dd HH:mm:ss"));
-        System.out.println("start-end:" + start.diff(end, null));
+        System.out.println("end-start Minutes:" + end.diff(start, DatePart.Minutes));
+        System.out.println("end-start Seconds:" + end.diff(start, DatePart.Seconds));
         System.out.println("start is after end:" + Boolean.toString(start.isAfter(end)));
         System.out.println("start is before end:" + Boolean.toString(start.isBefore(end)));
         System.out.println("current is between start and end:" + Boolean.toString(current.isBetween(start, end)));

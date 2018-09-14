@@ -45,7 +45,7 @@ public class Application {
     */
     public static EventProvider<EventArgs> getEventProvider() {
         if (eventProvider == null) {
-            eventProvider = new EventProvider(null);
+            eventProvider = new EventProvider<>(null);
         }
 
         return eventProvider;

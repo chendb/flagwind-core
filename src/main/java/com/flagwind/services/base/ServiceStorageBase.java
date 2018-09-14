@@ -1,6 +1,8 @@
 package com.flagwind.services.base;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.flagwind.commons.ConverterUtils;
 import com.flagwind.services.ServiceEntry;
 import com.flagwind.services.ServiceProvider;
 import com.flagwind.services.ServiceStorage;
@@ -65,45 +67,44 @@ public abstract class ServiceStorageBase implements ServiceStorage {
         this.add(entry);
         return entry;
     }
-   // public abstract void add(ServiceEntry entry);
+    // public abstract void add(ServiceEntry entry);
 
-   // public abstract void clear();
+    // public abstract void clear();
 
     @Override
-    public  ServiceEntry get(String name)
-    {
-        if(StringUtils.isEmpty(name)) {
+    public ServiceEntry get(String name) {
+        if (StringUtils.isEmpty(name)) {
             return null;
         }
 
-        //从当前容器及其外链容器中查找指定名称的服务
-        ServiceEntry result = this.find(name,Arrays.asList(this));
+        // 从当前容器及其外链容器中查找指定名称的服务
+        ServiceEntry result = this.find(name, Arrays.asList(this));
 
-        //如果上面的查找失败，则尝试从默认服务容器及其外链容器中查找指定名称的服务
-        if(result == null && DefaultServiceProviderFactory.getInstance().getDefault() != null && !this.equals(DefaultServiceProviderFactory.getInstance().getDefault())) {
-            result = this.find(name, Arrays.asList(DefaultServiceProviderFactory.getInstance().getDefault().getStorage()));
+        Object defaultService = DefaultServiceProviderFactory.getInstance().getDefault();
+
+        // 如果上面的查找失败，则尝试从默认服务容器及其外链容器中查找指定名称的服务
+        if (result == null && defaultService != null && !this.equals(defaultService)) {
+            result = this.find(name,
+                    Arrays.asList(DefaultServiceProviderFactory.getInstance().getDefault().getStorage()));
         }
 
         return result;
     }
 
     @Override
-    public  ServiceEntry get(Class<?> type)
-    {
-        return (ServiceEntry)this.find(type, null, false);
+    public ServiceEntry get(Class<?> type) {
+        return (ServiceEntry) this.find(type, null, false);
     }
 
     @Override
-    public   Iterable<ServiceEntry> getAll(Class<?>  type)
-    {
-        return (Iterable<ServiceEntry>)this.find(type, null, true);
+    public Iterable<ServiceEntry> getAll(Class<?> type) {
+        return ConverterUtils.cast(this.find(type, null, true));
     }
     // endregion
 
-
     // region 查找方法
     protected Object find(Class<?> type, Object parameter, boolean isMultiplex) {
-        //从当前容器及其外链容器中查找指定类型的服务
+        // 从当前容器及其外链容器中查找指定类型的服务
         List<ServiceStorage> storages = new ArrayList<>();
         storages.add(this);
         Object result = find(type, parameter, isMultiplex, storages);
@@ -111,16 +112,15 @@ public abstract class ServiceStorageBase implements ServiceStorage {
         boolean succeed = result != null;
 
         if (succeed) {
-            Collection<ServiceEntry> entiries = (Collection<ServiceEntry>) result;
+            Collection<ServiceEntry> entiries = ConverterUtils.cast(result);
             succeed &= entiries == null || entiries.size() > 0;
         }
 
-        //如果上面的查找失败，则尝试从默认服务容器及其外链容器中查找指定名称的服务
+        // 如果上面的查找失败，则尝试从默认服务容器及其外链容器中查找指定名称的服务
         if (!succeed && DefaultServiceProviderFactory.getInstance().getDefault() != null
                 && !this.equals(DefaultServiceProviderFactory.getInstance().getDefault())) {
-            result = this.find(type, parameter, isMultiplex, Arrays.asList(
-                    DefaultServiceProviderFactory.getInstance().getDefault().getStorage()
-            ));
+            result = this.find(type, parameter, isMultiplex,
+                    Arrays.asList(DefaultServiceProviderFactory.getInstance().getDefault().getStorage()));
         }
 
         return result;
@@ -142,16 +142,16 @@ public abstract class ServiceStorageBase implements ServiceStorage {
                     continue;
                 }
 
-                //如果服务条目声明了契约，则按契约声明进行匹配
+                // 如果服务条目声明了契约，则按契约声明进行匹配
                 if (entry.hasContracts()) {
-                    //契约的严格匹配
+                    // 契约的严格匹配
                     if (Arrays.asList(entry.getContractTypes()).contains(type)) {
                         if (!isMultiplex) {
                             return entry;
                         }
 
                         strong.add(entry);
-                    } else //契约的弱匹配
+                    } else // 契约的弱匹配
                     {
                         for (Class<?> contract : entry.getContractTypes()) {
 
@@ -160,16 +160,16 @@ public abstract class ServiceStorageBase implements ServiceStorage {
                             }
                         }
                     }
-                } else //处理未声明契约的服务
+                } else // 处理未声明契约的服务
                 {
-                    //服务类型的严格匹配
+                    // 服务类型的严格匹配
                     if (entry.getServiceType() == type) {
                         if (!isMultiplex) {
                             return entry;
                         }
 
                         strong.add(entry);
-                    } else //服务类型的弱匹配
+                    } else // 服务类型的弱匹配
                     {
                         if (type.isAssignableFrom(entry.getServiceType())) {
                             weakly.add(entry);
@@ -177,25 +177,24 @@ public abstract class ServiceStorageBase implements ServiceStorage {
                     }
                 }
 
-                //如果只查找单个服务
+                // 如果只查找单个服务
                 if (!isMultiplex) {
-                    //如果只查找单个服务，并且弱匹配已成功则退出查找
+                    // 如果只查找单个服务，并且弱匹配已成功则退出查找
                     if (weakly.size() > 0) {
                         break;
                     }
 
-                    //如果当前服务项是一个服务容器
+                    // 如果当前服务项是一个服务容器
                     if (ServiceProvider.class.isAssignableFrom(entry.getServiceType())) {
                         ServiceProvider provider = (ServiceProvider) entry.getService();
 
-                        //如果当前服务项对应的服务容器不在外部容器列表中，则将当前服务项(服务容器)加入到外部服务容器列表中
+                        // 如果当前服务项对应的服务容器不在外部容器列表中，则将当前服务项(服务容器)加入到外部服务容器列表中
                         if (provider != null && !storages.contains(provider.getStorage())) {
                             storages.add(provider.getStorage());
                         }
                     }
                 }
             }
-
 
             if (isMultiplex) {
                 strong.addAll(weakly);
@@ -205,7 +204,7 @@ public abstract class ServiceStorageBase implements ServiceStorage {
             }
         }
 
-        //返回空(查找失败)
+        // 返回空(查找失败)
         return null;
     }
 
@@ -222,16 +221,16 @@ public abstract class ServiceStorageBase implements ServiceStorage {
                     continue;
                 }
 
-                //如果名称匹配成功则返回（名称不区分大小写）
+                // 如果名称匹配成功则返回（名称不区分大小写）
                 if (StringUtils.equalsIgnoreCase(entry.name(), name)) {
                     return entry;
                 }
 
-                //如果当前服务项是一个服务容器
+                // 如果当前服务项是一个服务容器
                 if (entry.getServiceType() != null && ServiceProvider.class.isAssignableFrom(entry.getServiceType())) {
                     ServiceProvider provider = (ServiceProvider) entry.getService();
 
-                    //如果当前服务项对应的服务容器不在外部容器列表中，则将当前服务项(服务容器)加入到外部服务容器列表中
+                    // 如果当前服务项对应的服务容器不在外部容器列表中，则将当前服务项(服务容器)加入到外部服务容器列表中
                     if (provider != null && !storages.contains(provider.getStorage())) {
                         storages.add(provider.getStorage());
                     }
@@ -239,8 +238,7 @@ public abstract class ServiceStorageBase implements ServiceStorage {
             }
         }
 
-
-        //返回空(查找失败)
+        // 返回空(查找失败)
         return null;
     }
     // endregion
