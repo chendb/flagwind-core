@@ -628,6 +628,7 @@ public class Monment extends java.util.Date {
         c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND,0);
         return new Monment(c.getTimeInMillis());
     }
 
@@ -642,6 +643,7 @@ public class Monment extends java.util.Date {
         c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND,0);
         return new Monment(c.getTimeInMillis());
     }
 
@@ -656,6 +658,7 @@ public class Monment extends java.util.Date {
         c.set(Calendar.HOUR_OF_DAY, 23);
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
+        c.set(Calendar.MILLISECOND,0);
         return new Monment(c.getTimeInMillis());
     }
 
@@ -681,6 +684,7 @@ public class Monment extends java.util.Date {
         c.set(Calendar.HOUR_OF_DAY, 23);
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
+        c.set(Calendar.MILLISECOND,0);
         return new Monment(c.getTimeInMillis());
     }
 
@@ -707,8 +711,7 @@ public class Monment extends java.util.Date {
     public int weekOfYear() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this);
-        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
-        return weekOfYear;
+        return calendar.get(Calendar.WEEK_OF_YEAR);
     }
 
     /**
@@ -718,7 +721,7 @@ public class Monment extends java.util.Date {
      */
     public String toLongDate() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return (null == this) ? null : df.format(this);
+        return df.format(this);
     }
 
     /**
@@ -730,7 +733,7 @@ public class Monment extends java.util.Date {
      */
     public String toString(String formate) {
         DateFormat df = new SimpleDateFormat(formate);
-        return (null == this) ? null : df.format(this);
+        return df.format(this);
     }
 
     /**
@@ -740,7 +743,7 @@ public class Monment extends java.util.Date {
      */
     public String toTimestamp() {
         DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-        return (null == this) ? null : df.format(this);
+        return df.format(this);
     }
 
     /**
@@ -750,7 +753,7 @@ public class Monment extends java.util.Date {
      */
     public String toShortDate() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        return (null == this) ? null : df.format(this);
+        return df.format(this);
     }
 
     public static void main(String[] args) {
