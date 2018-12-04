@@ -79,7 +79,7 @@ public class AssociativeEntry {
         }
     }
 
-    public void excute(ExtensibleObject extensibleObject, Object value) {
+    public void execute(ExtensibleObject extensibleObject, Object value) {
         extensibleObject.set(this.name, this.getAssociateValue(value));
     }
 }

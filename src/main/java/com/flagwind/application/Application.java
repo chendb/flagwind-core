@@ -219,6 +219,7 @@ public class Application {
      */
     public static <T> T resolve(String name, String providerName) {
         ServiceProvider provider = getServiceProvider(providerName);
+        assert provider != null;
         return provider.resolve(name);
     }
 
@@ -233,7 +234,14 @@ public class Application {
      */
     public static <T> T resolve(String name) {
         ServiceProvider provider = getServiceProvider(null);
+        assert provider != null;
         return provider.resolve(name);
+    }
+
+    public static <T> Iterable<T> resolveAll(Class<?> serviceType) {
+        ServiceProvider provider = getServiceProvider(null);
+        assert provider != null;
+        return provider.resolveAll(serviceType);
     }
 
     /**
@@ -241,6 +249,7 @@ public class Application {
      */
     public static void register(String name,Object service) {
         ServiceProvider provider = getServiceProvider(null);
+        assert provider != null;
         provider.register(name, service);
     }
 

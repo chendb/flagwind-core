@@ -1,15 +1,12 @@
-package com.flagwind.reflect;
-
+package com.flagwind.reflect.entities;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * 封装字段和方法，统一调用某些方法
- * @author chendb
  */
 public class EntityField {
     private String name;
@@ -17,22 +14,6 @@ public class EntityField {
     private Class<?> javaType;
     private Method setter;
     private Method getter;
-
-    public Object getValue(Object entity,Object... args) throws InvocationTargetException, IllegalAccessException {
-        if (getter != null) {
-            return getter.invoke(entity, args);
-        } else {
-            return field.get(entity);
-        }
-    }
-
-    public void setValue(Object entity,Object... args) throws InvocationTargetException, IllegalAccessException {
-        if (setter != null) {
-            setter.invoke(entity, args);
-        }else {
-            field.set(entity, (args != null && args.length > 0) ? args[0] : null);
-        }
-    }
 
     /**
      * 构造方法
@@ -106,22 +87,6 @@ public class EntityField {
         }
         return result;
     }
-
-
-    public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
-        T[] result = null;
-        if (field != null) {
-            result = field.getAnnotationsByType(annotationClass);
-        }
-        if (result == null && setter != null) {
-            result = setter.getAnnotationsByType(annotationClass);
-        }
-        if (result == null && getter != null) {
-            result = getter.getAnnotationsByType(annotationClass);
-        }
-        return result;
-    }
-
 
     /**
      * 字段属性名

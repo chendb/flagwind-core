@@ -1,5 +1,7 @@
 package com.flagwind.commons;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -36,6 +38,7 @@ public class ConverterUtils {
             Type type = declaredMethod.getGenericReturnType();
             return to(type.getClass(), obj);
         } catch (Exception e) {
+            ExceptionUtils.wrapAndThrow(e);
             return null;
         }
     }
@@ -119,7 +122,7 @@ public class ConverterUtils {
                 return Integer.parseInt((String) obj);
             }
 
-            return (obj != null) ? Integer.parseInt(toString(obj, "0")) : defaultVal;
+            return Integer.parseInt(toString(obj, "0"));
         } catch (Exception e) {
         }
         return defaultVal;
@@ -166,7 +169,7 @@ public class ConverterUtils {
         } else if (obj instanceof String) {
             return Float.parseFloat((String) obj);
         }
-        return (obj != null) ? Float.parseFloat(toString(obj, "0")) : defaultVal;
+        return Float.parseFloat(toString(obj, "0"));
     }
 
     /**
@@ -196,11 +199,11 @@ public class ConverterUtils {
         } else if (obj instanceof Double) {
             return Math.round((Double) obj);
         } else if (obj instanceof Float) {
-            return new Long(Math.round((Float) obj));
+            return (long) Math.round((Float) obj);
         } else if (obj instanceof String) {
             return Long.parseLong((String) obj);
         }
-        return (obj != null) ? Long.parseLong(toString(obj)) : defaultVal;
+        return Long.parseLong(toString(obj));
     }
 
     /**
