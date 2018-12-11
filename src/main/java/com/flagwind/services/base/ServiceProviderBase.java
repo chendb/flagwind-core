@@ -1,6 +1,7 @@
 package com.flagwind.services.base;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.flagwind.commons.ConverterUtils;
 import com.flagwind.commons.StringUtils;
@@ -179,7 +180,7 @@ public abstract class ServiceProviderBase extends EventProvider<EventArgs> imple
         return result;
     }
 
-    public <T> Iterable<T> resolveAll(Class<?> type) {
+    public <T> List<T> resolveAll(Class<?> type) {
         return ConverterUtils.cast(this.resolveAll(type, null));
     }
 
@@ -198,9 +199,7 @@ public abstract class ServiceProviderBase extends EventProvider<EventArgs> imple
         Iterable<ServiceEntry> entries = this.storage.getAll(type);
 
         if (entries != null) {
-            entries.forEach(entry -> {
-                result.add(this.getService(entry));
-            });
+            entries.forEach(entry -> result.add(this.getService(entry)));
         }
 
         //激发“Resolved”事件

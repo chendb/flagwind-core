@@ -1,5 +1,7 @@
 package com.flagwind.services;
 
+import java.util.List;
+
 public interface ServiceProvider {
     /**
      * 获取服务仓储实例。
@@ -78,5 +80,5 @@ public interface ServiceProvider {
      * @param serviceType
      * @return IEnumerable
      */
-      <T> Iterable<T> resolveAll(Class<?> serviceType);
+      <T> List<T> resolveAll(Class<?> serviceType);
 }

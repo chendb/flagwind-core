@@ -8,6 +8,7 @@ import com.flagwind.events.EventProvider;
 import com.flagwind.services.ServiceProvider;
 import com.flagwind.services.ServiceProviderFactory;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -238,7 +239,13 @@ public class Application {
         return provider.resolve(name);
     }
 
-    public static <T> Iterable<T> resolveAll(Class<?> serviceType) {
+    public static <T> T resolve(Class<?> serviceType) {
+        ServiceProvider provider = getServiceProvider(null);
+        assert provider != null;
+        return provider.resolve(serviceType);
+    }
+
+    public static <T> List<T> resolveAll(Class<?> serviceType) {
         ServiceProvider provider = getServiceProvider(null);
         assert provider != null;
         return provider.resolveAll(serviceType);
