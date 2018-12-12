@@ -756,6 +756,14 @@ public class Monment extends java.util.Date {
         return df.format(this);
     }
 
+    /***
+     * 静态构建方法
+     * @return Monment实例
+     */
+    public static Monment build() {
+        return new Monment();
+    }
+
     public static void main(String[] args) {
         Monment start = new Monment(System.currentTimeMillis() - 10000);
         Monment current = new Monment();
