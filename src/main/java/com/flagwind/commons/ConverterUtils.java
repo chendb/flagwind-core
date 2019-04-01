@@ -46,19 +46,18 @@ public class ConverterUtils {
     @SuppressWarnings("unchecked")
     public static <T, S> T to(Class<?> clzss, S obj) {
 
-        if (clzss == Integer.TYPE) {
-            return (T) toInt(obj, null);
-        } else if (clzss == Long.TYPE) {
-            return (T) toLong(obj, null);
-        } else if (clzss == Double.TYPE) {
-            return (T) toDouble(obj, null);
-        } else if (clzss == Float.TYPE) {
-            return (T) toFloat(obj, null);
+        if (clzss == Integer.TYPE || clzss == Integer.class) {
+            return (T) toInt(obj, clzss == Integer.class?null:0);
+        } else if (clzss == Long.TYPE || clzss == Long.class) {
+            return (T) toLong(obj, clzss == Long.class?null:0L);
+        } else if (clzss == Double.TYPE || clzss == Double.class) {
+            return (T) toDouble(obj, clzss == Double.class?null:0D);
+        } else if (clzss == Float.TYPE || clzss == Float.class) {
+            return (T) toFloat(obj, clzss == Float.class?null:0F);
         } else if (clzss == String.class) {
             return (T) toString(obj, null);
         }
         return (T) obj;
-
     }
 
     /**
