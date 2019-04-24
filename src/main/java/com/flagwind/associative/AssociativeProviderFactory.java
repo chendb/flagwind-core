@@ -5,25 +5,25 @@ import com.flagwind.application.Application;
 /**
  * 提供器工厂
  */
-public class ProviderFactory {
+public class AssociativeProviderFactory {
 
     private Discovery discovery;
 
     // #region 构造函数
-    public ProviderFactory(Discovery discovery) {
+    public AssociativeProviderFactory(Discovery discovery) {
         this.discovery = discovery;
     }
     // #endregion
 
-    private static ProviderFactory _default;
+    private static AssociativeProviderFactory _default;
 
-    public static void setInstance(ProviderFactory factory) {
+    public static void setInstance(AssociativeProviderFactory factory) {
         _default = factory;
     }
 
-    public static ProviderFactory instance() {
+    public static AssociativeProviderFactory instance() {
         if (_default == null) {
-            _default = new ProviderFactory(new Discovery() {
+            _default = new AssociativeProviderFactory(new Discovery() {
 
                 @Override
                 public <T> T discover(String name) {
@@ -46,7 +46,7 @@ public class ProviderFactory {
      * @param source 关键字
      * @return
      */
-    public Provider resolve(String source) {
+    public AssociativeProvider resolve(String source) {
         return this.discovery.discover(source);
     }
 
@@ -56,7 +56,7 @@ public class ProviderFactory {
      * @param providerType 提供器类型
      * @return
      */
-    public Provider resolve(Class<?> providerType) {
+    public AssociativeProvider resolve(Class<?> providerType) {
         return this.discovery.discover(providerType);
     }
 

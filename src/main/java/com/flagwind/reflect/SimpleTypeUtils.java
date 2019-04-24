@@ -14,7 +14,7 @@ import com.flagwind.commons.Monment;
 /**
  * 简单类型判断工具
  */
-public class SimpleTypes {
+public class SimpleTypeUtils {
     private static final Set<Class<?>> SIMPLE_TYPE_SET = new HashSet<Class<?>>();
 
     /**
