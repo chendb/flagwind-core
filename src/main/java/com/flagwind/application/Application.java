@@ -8,6 +8,7 @@ import com.flagwind.events.EventProvider;
 import com.flagwind.services.ServiceProvider;
 import com.flagwind.services.ServiceProviderFactory;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -39,11 +40,11 @@ public class Application {
 
     // region 公共属性
     /**
-    * 获取一个事件提供程序实例。
-    * 
-    * 
-    * @return IEventProvider
-    */
+     * 获取一个事件提供程序实例。
+     * 
+     * 
+     * @return IEventProvider
+     */
     public static EventProvider<EventArgs> getEventProvider() {
         if (eventProvider == null) {
             eventProvider = new EventProvider<>(null);
@@ -86,20 +87,17 @@ public class Application {
 
     // region 事件名称
     /**
-     * 当应用程序启动时产生的事件。
-     * event：ApplicationEventArgs
+     * 当应用程序启动时产生的事件。 event：ApplicationEventArgs
      */
     public static String STARTING = "starting";
 
     /**
-     * 当应用程序启动后产生的事件。
-     * event：ApplicationEventArgs
+     * 当应用程序启动后产生的事件。 event：ApplicationEventArgs
      */
     public static String STARTED = "started";
 
     /**
-     * 当应用程序即将退出时产生的事件。
-     * event：CancelEventArgs
+     * 当应用程序即将退出时产生的事件。 event：CancelEventArgs
      */
     public static String EXITING = "exiting";
 
@@ -110,8 +108,8 @@ public class Application {
     /**
      * 启动应用程序。
      * 
-     * @param  applicationContext 应用程序上下文实例。
-     * @param  args 启动参数。
+     * @param applicationContext 应用程序上下文实例。
+     * @param args               启动参数。
      * 
      */
     public static void start(ApplicationContextBase applicationContext, String... args) {
@@ -133,7 +131,8 @@ public class Application {
             // 将应用上下文对象注册到默认服务容器中
 
             // if (context.getServiceFactory().getDefault() != null) {
-            //     context.getServiceFactory().getDefault().register("applicationContext", applicationContext);
+            // context.getServiceFactory().getDefault().register("applicationContext",
+            // applicationContext);
             // }
 
             // 初始化全局模块
@@ -211,12 +210,10 @@ public class Application {
     /**
      * 根据名称与对象提供器解析对象
      * 
-     * @param name 名称
+     * @param name         名称
      * @param providerName 对象提供器解析
-     * @param <T> 解析对象类型
-     * @return 解析后对象
-     * author：chendb
-     * 2016年12月9日 上午9:22:58
+     * @param <T>          解析对象类型
+     * @return 解析后对象 author：chendb 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name, String providerName) {
         ServiceProvider provider = getServiceProvider(providerName);
@@ -228,10 +225,8 @@ public class Application {
      * 根据名称解析对象
      * 
      * @param name 名称
-     * @param <T> 解析对象类型
-     * @return 解析后对象
-     * author：chendb
-     * 2016年12月9日 上午9:22:58
+     * @param <T>  解析对象类型
+     * @return 解析后对象 author：chendb 2016年12月9日 上午9:22:58
      */
     public static <T> T resolve(String name) {
         ServiceProvider provider = getServiceProvider(null);
@@ -254,7 +249,7 @@ public class Application {
     /**
      * 向容器中注册对象
      */
-    public static void register(String name,Object service) {
+    public static void register(String name, Object service) {
         ServiceProvider provider = getServiceProvider(null);
         assert provider != null;
         provider.register(name, service);
@@ -273,10 +268,11 @@ public class Application {
     }
 
     /**
-    * 派发一个指定参数的事件。
-    * @param eventArgs 事件参数实例。
-    * 
-    */
+     * 派发一个指定参数的事件。
+     * 
+     * @param eventArgs 事件参数实例。
+     * 
+     */
     public static void dispatchEvent(EventArgs eventArgs) {
         getEventProvider().dispatchEvent(eventArgs);
     }
@@ -287,7 +283,11 @@ public class Application {
     private static void disposeGlobalModules(ApplicationContextBase context) {
         context.getModules().forEach(p -> {
             if (p != null) {
-                p.dispose();
+                try {
+                    p.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("关闭module异常",e);
+                }
             }
         });
     }

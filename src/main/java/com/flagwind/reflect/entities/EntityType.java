@@ -1,5 +1,6 @@
 package com.flagwind.reflect.entities;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 public class EntityType
@@ -42,5 +43,36 @@ public class EntityType
 	public <T> T createInstance() throws Exception
 	{
 		return (T) getInstanceType().newInstance();
+	}
+
+	
+    /**
+     * 是否有该注解
+     *
+     * @param annotationClass
+     * @return
+     */
+    public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
+        boolean result = false;
+        if (instanceType != null) {
+            result = instanceType.isAnnotationPresent(annotationClass);
+        }
+        return result;
+    }
+
+    /**
+     * 获取指定的注解
+     *
+     * @param annotationClass
+     * @param <T>
+     * @return
+     */
+    public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
+        T result = null;
+        if (instanceType != null) {
+            result = (T) instanceType.getAnnotation(annotationClass);
+        }
+       
+        return result;
 	}
 }

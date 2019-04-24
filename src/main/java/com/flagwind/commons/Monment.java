@@ -359,7 +359,7 @@ public class Monment extends java.util.Date {
      * @return TimeSpan 时间间隔
      */
     public TimeSpan diff(Monment time) {
-        return new TimeSpan(this.getTime() - time.getTime());
+        return new TimeSpan(Math.abs(this.getTime() - time.getTime()));
     }
 
     /**
