@@ -74,7 +74,7 @@ public class ConverterUtils {
         if (obj instanceof Date) {
             Date date = ((Date) obj);
             if (date.getHours() == 0 && date.getMinutes() == 0 && date.getSeconds() == 0) {
-                return (new Monment((Date) obj)).toString("yyyy-MM-dd HH:mm:ss");
+                return (new Monment((Date) obj)).toString("yyyy-MM-dd");
             } else {
                 return (new Monment((Date) obj)).toString("yyyy-MM-dd HH:mm:ss");
             }

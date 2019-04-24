@@ -75,4 +75,12 @@ public class EntityType
        
         return result;
 	}
+
+	public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
+		T[] result = null;
+		if (instanceType != null) {
+			result = (T[]) instanceType.getAnnotationsByType(annotationClass);
+		}
+		return result;
+	}
 }

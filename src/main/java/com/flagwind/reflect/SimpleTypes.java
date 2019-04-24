@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.flagwind.commons.Monment;
+
 /**
  * 简单类型判断工具
  */
@@ -36,7 +38,8 @@ public class SimpleTypes {
         SIMPLE_TYPE_SET.add(Boolean.class);
         SIMPLE_TYPE_SET.add(Date.class);
         SIMPLE_TYPE_SET.add(Timestamp.class);
-        SIMPLE_TYPE_SET.add(Class.class);
+        SIMPLE_TYPE_SET.add(Monment.class);
+        // SIMPLE_TYPE_SET.add(Class.class);
         SIMPLE_TYPE_SET.add(BigInteger.class);
         SIMPLE_TYPE_SET.add(BigDecimal.class);
     }

@@ -70,8 +70,12 @@ public class AssociativeEntry {
         this.tigger = tigger;
     }
 
+    public Provider getAssociativeProvider(){
+        return ProviderFactory.instance().resolve(this.provider);
+    }
+
     public Object getAssociateValue(Object value) {
-        Provider provider = ProviderFactory.resolve(this.provider);
+        Provider provider = ProviderFactory.instance().resolve(this.provider);
         if (StringUtils.isEmpty(extras)) {
             return provider.associate(value);
         } else {

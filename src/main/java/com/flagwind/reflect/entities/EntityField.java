@@ -3,6 +3,7 @@ package com.flagwind.reflect.entities;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -86,6 +87,36 @@ public class EntityField {
             result = getter.getAnnotation(annotationClass);
         }
         return result;
+    }
+
+    public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
+        T[] result = null;
+        if (field != null) {
+            result = field.getAnnotationsByType(annotationClass);
+        }
+        if (result == null && setter != null) {
+            result = setter.getAnnotationsByType(annotationClass);
+        }
+        if (result == null && getter != null) {
+            result = getter.getAnnotationsByType(annotationClass);
+        }
+        return result;
+    }
+
+    public Object getValue(Object entity, Object[] args) throws InvocationTargetException, IllegalAccessException {
+        if (getter != null) {
+            return getter.invoke(entity, args);
+        } else {
+            return field.get(entity);
+        }
+    }
+
+    public void setValue(Object entity, Object[] args) throws InvocationTargetException, IllegalAccessException {
+        if (setter != null) {
+            setter.invoke(entity, args);
+        } else {
+            field.set(entity, (args != null && args.length > 0) ? args[0] : null);
+        }
     }
 
     /**
