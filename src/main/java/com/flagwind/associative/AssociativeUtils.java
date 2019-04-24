@@ -10,9 +10,9 @@ import org.apache.commons.logging.LogFactory;
 
 public class AssociativeUtils {
 
-    private Log LOG = LogFactory.getLog(AssociativeUtils.class);
+    private static Log LOG = LogFactory.getLog(AssociativeUtils.class);
 
-    private void setFieldValue(ExtensibleObject extensibleObject, EntityField field, Object value) {
+    public static void setFieldValue(ExtensibleObject extensibleObject, EntityField field, Object value) {
 
         if (field.isAnnotationPresent(Associatives.class)) {
             Associatives associatives = field.getAnnotation(Associatives.class);
@@ -39,7 +39,7 @@ public class AssociativeUtils {
 
     }
 
-    private void setFieldValue(ExtensibleObject extensibleObject, String propertyName, Object value) {
+    public static void setFieldValue(ExtensibleObject extensibleObject, String propertyName, Object value) {
         EntityField field = EntityTypeHolder.getField(extensibleObject.getClass(), propertyName);
         setFieldValue(extensibleObject, field, value);
     }
