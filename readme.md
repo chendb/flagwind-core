@@ -19,4 +19,4 @@ mvn release:perform
 
 2018-9-14 增加了联想注解的设计
 
-2019-4-24 解决TimeSpa BUG 以及优化联想注解设计
+2019-4-24 解决TimeSpan BUG 以及优化联想注解设计
