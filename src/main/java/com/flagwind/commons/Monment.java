@@ -367,7 +367,7 @@ public class Monment extends java.util.Date {
      *  如：m1:2018-05-31 08：30：30, m2:2018-05-31 08：25:10
      *  m1.diff(m2,DatePart.Hours) 为 0
      *  m1.diff(m2,DatePart.Minutes) 为 5
-     *  m1.diff(m2,DatePart.Seconds) 为 5*60+20
+     *  m1.diff(m2,DatePart.Seconds) 为 20
      */
     @Deprecated
     public long diff(Monment time, DatePart part) {

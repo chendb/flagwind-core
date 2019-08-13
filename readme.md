@@ -20,3 +20,5 @@ mvn release:perform
 2018-9-14 增加了联想注解的设计
 
 2019-4-24 解决TimeSpan BUG 以及优化联想注解设计
+
+2019-8-12 把 flagwind-persistent 的类设计提出并放置在本工程

@@ -3,8 +3,7 @@ package com.flagwind.commons;
 /**
  * 时间戳
  * 
- * author：chendb hbchendb1985@hotmail
- * date：2015年9月25日 下午5:58:38
+ * author：chendb hbchendb1985@hotmail date：2015年9月25日 下午5:58:38
  */
 public class TimeSpan {
 
@@ -84,54 +83,47 @@ public class TimeSpan {
      * 
      * @param totalMilliSeconds ms数
      */
-    public TimeSpan(long totalMilliSeconds)
-    {
+    public TimeSpan(long totalMilliSeconds) {
 
-        long ms = totalMilliSeconds;
+        long ms = Math.abs(totalMilliSeconds);
         {
             long yearMS = 1000 * 60 * 60 * 24 * 365L;
-            if(ms >= yearMS)
-            {
+            if (ms >= yearMS) {
                 this.years = Math.round(totalMilliSeconds / yearMS);
                 ms = ms % yearMS;
             }
         }
         {
             long monthMS = 1000 * 60 * 60 * 24 * 30L;
-            if(ms >= monthMS)
-            {
+            if (ms >= monthMS) {
                 this.months = Math.round(ms / monthMS);
                 ms = ms % monthMS;
             }
         }
         {
             long dayMS = 1000 * 60 * 60 * 24L;
-            if(ms >= dayMS)
-            {
+            if (ms >= dayMS) {
                 this.days = Math.round(ms / dayMS);
                 ms = ms % dayMS;
             }
         }
         {
             long hourMS = 1000 * 60 * 60L;
-            if(ms >= hourMS)
-            {
+            if (ms >= hourMS) {
                 this.hours = Math.round(ms / hourMS);
                 ms = ms % hourMS;
             }
         }
         {
             long minuteMS = 1000 * 60L;
-            if(ms >= minuteMS)
-            {
+            if (ms >= minuteMS) {
                 this.minutes = Math.round(ms / minuteMS);
                 ms = ms % minuteMS;
             }
         }
         {
             long secondMS = 1000L;
-            if(ms >= secondMS)
-            {
+            if (ms >= secondMS) {
                 this.minutes = Math.round(ms / secondMS);
                 ms = ms % secondMS;
             }
@@ -142,20 +134,20 @@ public class TimeSpan {
             this.millisecond = Math.round(ms / 1000);
 
         }
-        //        this.days = Math.round(totalMilliSeconds * 1.0f / (1000 * 60 * 60 * 24));
-        //        this.hours = Math.round((totalMilliSeconds * 1.0f / (1000 * 60 * 60)) % 60);
-        //        this.minutes = Math.round((totalMilliSeconds * 1.0f / (1000 * 60)) % 60);
-        //        this.seconds = Math.round((totalMilliSeconds * 1.0f / (1000)) % 60);
-        //        this.millisecond = Math.round(totalMilliSeconds * 1.0f % (1000));
+        // this.days = Math.round(totalMilliSeconds * 1.0f / (1000 * 60 * 60 * 24));
+        // this.hours = Math.round((totalMilliSeconds * 1.0f / (1000 * 60 * 60)) % 60);
+        // this.minutes = Math.round((totalMilliSeconds * 1.0f / (1000 * 60)) % 60);
+        // this.seconds = Math.round((totalMilliSeconds * 1.0f / (1000)) % 60);
+        // this.millisecond = Math.round(totalMilliSeconds * 1.0f % (1000));
     }
 
     /**
      * 构造函数
      * 
-     * @param d 天
-     * @param h 时
-     * @param m 分
-     * @param s 钞
+     * @param d  天
+     * @param h  时
+     * @param m  分
+     * @param s  钞
      * @param ms 毫秒
      */
     public TimeSpan(int d, int h, int m, int s, int ms) {
@@ -201,12 +193,9 @@ public class TimeSpan {
      * 等于
      * 
      * @param ts 时间间隔
-     * @return 是否等于
-     * author：chendb
-     * date：2016年12月9日 上午12:11:25
+     * @return 是否等于 author：chendb date：2016年12月9日 上午12:11:25
      */
-    public Boolean equals(TimeSpan ts)
-    {
+    public Boolean equals(TimeSpan ts) {
         return this.totalMillisecond() == ts.totalMillisecond();
     }
 
@@ -214,12 +203,9 @@ public class TimeSpan {
      * 增加
      * 
      * @param ts 时间间隔
-     * @return 时间间隔
-     * author：chendb
-     * date：2016年12月9日 上午12:12:12
+     * @return 时间间隔 author：chendb date：2016年12月9日 上午12:12:12
      */
-    public TimeSpan add(TimeSpan ts)
-    {
+    public TimeSpan add(TimeSpan ts) {
         long ms = this.totalMillisecond() + ts.totalMillisecond();
         return new TimeSpan(ms);
     }
@@ -228,31 +214,26 @@ public class TimeSpan {
      * 相减
      * 
      * @param ts 时间间隔
-     * @return 时间间隔
-     * author：chendb
-     * date：2016年12月9日 上午12:12:35
+     * @return 时间间隔 author：chendb date：2016年12月9日 上午12:12:35
      */
-    public TimeSpan subtract(TimeSpan ts)
-    {
+    public TimeSpan subtract(TimeSpan ts) {
         long ms1 = this.totalMillisecond();
 
         long ms2 = ts.totalMillisecond();
-        if(ms2 > ms1)
-        {
+        if (ms2 > ms1) {
             throw new RuntimeException("不能减一个大小自身的时间间隔");
         }
         return new TimeSpan(ms1 - ms2);
     }
 
-    public long totalDays(){
-        return (this.getYears()*365+this.getMonths()*30+this.getDays());
+    public long totalDays() {
+        return (this.getYears() * 365 + this.getMonths() * 30 + this.getDays());
     }
+
     /**
      * 总小时数
      * 
-     * @return 总小时数
-     * author：chendb
-     * date：2016年12月9日 上午12:12:52
+     * @return 总小时数 author：chendb date：2016年12月9日 上午12:12:52
      */
     public long totalHours() {
         return (this.totalDays() * 24) + this.getHours();
@@ -261,9 +242,7 @@ public class TimeSpan {
     /**
      * 总分钟数
      * 
-     * @return 总分钟数
-     * author：chendb
-     * date：2016年12月9日 上午12:13:10
+     * @return 总分钟数 author：chendb date：2016年12月9日 上午12:13:10
      */
     public long totalMinutes() {
         return (this.totalHours() * 60) + this.getMinutes();
@@ -272,9 +251,7 @@ public class TimeSpan {
     /**
      * 总的钞数
      * 
-     * @return 总的钞数
-     * author：chendb
-     * date：2016年12月9日 上午12:13:32
+     * @return 总的钞数 author：chendb date：2016年12月9日 上午12:13:32
      */
     public long totalSeconds() {
         return (this.totalMinutes() * 60) + this.getSeconds();
@@ -283,12 +260,10 @@ public class TimeSpan {
     /**
      * 总的ms数
      * 
-     * @return 总的ms数
-     * author：chendb
-     * date：2016年12月9日 上午12:17:22
+     * @return 总的ms数 author：chendb date：2016年12月9日 上午12:17:22
      */
     public long totalMillisecond() {
-        return this.totalSeconds()* 1000 + this.getMillisecond();
+        return this.totalSeconds() * 1000 + this.getMillisecond();
     }
 
     @Override

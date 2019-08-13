@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 多联想注解
+ * 联想注解
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
