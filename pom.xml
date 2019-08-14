@@ -74,6 +74,14 @@
 							<shadedPattern>com.flagwind.persistent</shadedPattern>
 						</relocation>
 					</relocations>
+
+
+					<artifactSet>
+						<includes>
+							<include>*:flagwind-core</include>
+						</includes>
+					</artifactSet>
+
 				</configuration>
 				<executions>
 					<execution>
