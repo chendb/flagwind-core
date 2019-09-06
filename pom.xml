@@ -6,7 +6,7 @@
 		<version>7</version>
 	</parent>
 	<groupId>com.github.chendb</groupId>
-	<version>1.0.8</version>
+	<version>1.0.9-SNAPSHOT</version>
 	<artifactId>flagwind-core</artifactId>
 	<name>flagwind-core</name>
 	<properties>
