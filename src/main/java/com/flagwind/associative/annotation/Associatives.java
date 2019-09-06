@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 联想注解
  */
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE,ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Associatives {
     Associative[] value();

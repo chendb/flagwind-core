@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * 联想注解
  */
 @Repeatable(Associatives.class)
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE,ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Associative {
     /**

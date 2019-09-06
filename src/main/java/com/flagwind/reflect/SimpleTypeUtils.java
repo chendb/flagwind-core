@@ -73,6 +73,12 @@ public class SimpleTypeUtils {
 
 
     public static boolean isSimpleType(Class<?> clazz) {
+        if (clazz.isEnum()) {
+            return true;
+        }
+        if(java.util.Date.class.isAssignableFrom(clazz)){
+            return true;
+        }
         return SIMPLE_TYPE_SET.contains(clazz);
     }
 

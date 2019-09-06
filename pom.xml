@@ -14,6 +14,12 @@
 		<jdk.version>1.8</jdk.version>
 	</properties>
 	<dependencies>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.1.2.RELEASE</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -121,7 +127,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<!-- 解决 java8 下发布到 maven 中心库时，生成 doc 的异常 -->
-					<additionalparam>-Xdoclint:none</additionalparam>
+					<additionalJOption>-Xdoclint:none</additionalJOption>
 					<doclint>none</doclint>
 					<charset>${project.build.sourceEncoding}</charset>
 					<encoding>${project.build.sourceEncoding}</encoding>
