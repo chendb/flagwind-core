@@ -21,13 +21,6 @@ public @interface Associative {
      */
     String provider();
 
-    /**
-     * 生成联想属性的转换器（与provider同一意义）
-     * @deprecated 该参数换成了provider
-     * @return
-     */
-    @Deprecated
-    String source();
 
     /**
      * 扩展参数

@@ -1,5 +1,6 @@
 package com.flagwind.reflect;
 
+import com.flagwind.lang.CodeType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ public class SimpleTypeUtils {
         // SIMPLE_TYPE_SET.add(Class.class);
         SIMPLE_TYPE_SET.add(BigInteger.class);
         SIMPLE_TYPE_SET.add(BigDecimal.class);
+        SIMPLE_TYPE_SET.add(CodeType.class);
     }
 
     /**
@@ -76,7 +78,10 @@ public class SimpleTypeUtils {
         if (clazz.isEnum()) {
             return true;
         }
-        if(java.util.Date.class.isAssignableFrom(clazz)){
+        if (java.util.Date.class.isAssignableFrom(clazz)) {
+            return true;
+        }
+        if (CodeType.class.isAssignableFrom(clazz)) {
             return true;
         }
         return SIMPLE_TYPE_SET.contains(clazz);

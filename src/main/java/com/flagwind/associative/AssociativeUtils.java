@@ -2,10 +2,7 @@ package com.flagwind.associative;
 
 import com.flagwind.application.Application;
 import com.flagwind.associative.annotation.Associative;
-import com.flagwind.associative.annotation.Associatives;
 import com.flagwind.associative.annotation.Associative.TriggerType;
-import com.flagwind.commons.ConverterUtils;
-import com.flagwind.commons.StringUtils;
 import com.flagwind.lang.ExtensibleObject;
 import com.flagwind.reflect.EntityTypeHolder;
 import com.flagwind.reflect.entities.EntityField;
@@ -26,9 +23,6 @@ public class AssociativeUtils {
             for (Associative associative : associatives) {
                 if (associative.tigger().equals(triggerType)) {
                     String provider = associative.provider();
-                    if (StringUtils.isEmpty(provider)) {
-                        provider = associative.source();
-                    }
                     AssociativeEntry entry = new AssociativeEntry(associative.name(), provider, associative.extras());
                     if (entry.getAssociativeProvider() != null) {
                         entry.execute(extensibleObject, value);
