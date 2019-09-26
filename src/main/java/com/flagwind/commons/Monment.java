@@ -245,7 +245,8 @@ public class Monment extends java.util.Date {
      * @return boolean
      */
     public boolean isAfter(Monment date) {
-        return this.diff(date, null) > 0;
+
+        return this.getTime()-date.getTime() > 0;
     }
 
     /**
@@ -255,7 +256,7 @@ public class Monment extends java.util.Date {
      * @return boolean
      */
     public boolean isBefore(Monment date) {
-        return this.diff(date, null) < 0;
+        return this.getTime()-date.getTime() < 0;
     }
 
     /**

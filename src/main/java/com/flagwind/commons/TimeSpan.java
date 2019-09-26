@@ -85,7 +85,7 @@ public class TimeSpan {
      */
     public TimeSpan(long totalMilliSeconds) {
 
-        long ms = Math.abs(totalMilliSeconds);
+        long ms = totalMilliSeconds;
         {
             long yearMS = 1000 * 60 * 60 * 24 * 365L;
             if (ms >= yearMS) {
