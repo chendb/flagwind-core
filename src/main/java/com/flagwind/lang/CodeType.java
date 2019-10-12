@@ -18,5 +18,5 @@ public interface CodeType {
      * @author chendb
      * @date 2016年12月8日 下午11:44:42
      */
-    String getDescription();
+    String getText();
 }
