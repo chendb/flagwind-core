@@ -1,5 +1,6 @@
 package com.flagwind.reflect.entities;
 
+import com.flagwind.commons.StringUtils;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import java.lang.annotation.Annotation;
@@ -17,6 +18,15 @@ public class EntityType
 	{
 		this.instanceType = instanceType;
 		this.name = instanceType.getName();
+	}
+
+	public EntityField getField(String name) {
+		for (EntityField field : fields) {
+			if (StringUtils.equalsIgnoreCase(field.getName(), name)) {
+				return field;
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<EntityField> getFields()
