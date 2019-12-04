@@ -1,13 +1,11 @@
 package com.flagwind.lang;
 
-import com.flagwind.application.Application;
 import com.flagwind.commons.StringUtils;
+import com.flagwind.reflect.EntityTypeHolder;
 import com.flagwind.reflect.entities.EntityField;
-import com.flagwind.reflect.entities.EntityTypeUtils;
 
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 
 public class CodeTypes {
 
@@ -54,7 +52,7 @@ public class CodeTypes {
     public static <T extends CodeType> T valueOf(Class<T> tClass,String value) throws IllegalClassFormatException {
         try {
             T t = tClass.newInstance();
-            EntityField field = EntityTypeUtils.getEntityType(tClass).getField("value");
+            EntityField field = EntityTypeHolder.getField(tClass,"value");
             field.setValue(t, new Object[]{value});
             return t;
         } catch (InstantiationException e) {

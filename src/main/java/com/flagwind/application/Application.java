@@ -281,15 +281,17 @@ public class Application {
 
     // region Module 调用
     private static void disposeGlobalModules(ApplicationContextBase context) {
-        context.getModules().forEach(p -> {
-            if (p != null) {
-                try {
-                    p.close();
-                } catch (IOException e) {
-                    throw new RuntimeException("关闭module异常",e);
+        if(context!=null) {
+            context.getModules().forEach(p -> {
+                if (p != null) {
+                    try {
+                        p.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException("关闭module异常", e);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private static void initializeGlobalModules(ApplicationContextBase context) {
