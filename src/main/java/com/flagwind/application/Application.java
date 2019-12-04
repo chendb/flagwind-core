@@ -11,6 +11,7 @@ import com.flagwind.services.ServiceProviderFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -282,7 +283,8 @@ public class Application {
     // region Module 调用
     private static void disposeGlobalModules(ApplicationContextBase context) {
         if(context!=null) {
-            context.getModules().forEach(p -> {
+            List<ApplicationModule> list = context.getModules().stream().collect(Collectors.toList());
+            for (ApplicationModule p : list) {
                 if (p != null) {
                     try {
                         p.close();
@@ -290,7 +292,7 @@ public class Application {
                         throw new RuntimeException("关闭module异常", e);
                     }
                 }
-            });
+            }
         }
     }
 
