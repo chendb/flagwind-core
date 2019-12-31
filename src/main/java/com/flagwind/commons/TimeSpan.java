@@ -124,7 +124,7 @@ public class TimeSpan {
         {
             long secondMS = 1000L;
             if (ms >= secondMS) {
-                this.minutes = Math.round(ms / secondMS);
+                this.seconds = Math.round(ms / secondMS);
                 ms = ms % secondMS;
             }
         }

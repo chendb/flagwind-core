@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.TemporalUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,6 +29,10 @@ public class Monment extends java.util.Date {
 
     public Monment(Timestamp date) {
         super(date.getTime());
+    }
+
+    public Monment(LocalDateTime localDateTime) {
+        super(localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
     }
 
     /**
@@ -79,10 +86,13 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment second(int second) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.SECOND, second);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withSecond(second).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.SECOND, second);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -107,10 +117,13 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment minute(int minute) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.MINUTE, minute);
-        return new Monment(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.MINUTE, minute);
+//        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withMinute(minute).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
     }
 
     /**
@@ -121,11 +134,15 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment hour(int hour) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.HOUR_OF_DAY, hour);
-        return new Monment(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.HOUR_OF_DAY, hour);
+//        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withHour(hour).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
     }
+
 
     /**
      * 功能：将当前日期的天进行重新设置。
@@ -135,10 +152,13 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment day(int day) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.DATE, day);
-        return new Monment(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.DATE, day);
+//        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withDayOfMonth(day).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
     }
 
     /**
@@ -149,10 +169,13 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment month(int month) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.MONTH, month - 1);
-        return new Monment(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.MONTH, month - 1);
+//        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withMonth(month).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
     }
 
     /**
@@ -163,10 +186,13 @@ public class Monment extends java.util.Date {
      * @return 设置后的日期
      */
     public Monment year(int year) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.YEAR, year);
-        return new Monment(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.YEAR, year);
+//        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().withYear(year).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
     }
 
     // endregion
@@ -178,9 +204,11 @@ public class Monment extends java.util.Date {
      * @return int
      */
     public int dayOfMonth() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(this);
-        return cal.getActualMaximum(Calendar.DATE);
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(this);
+//        return cal.getActualMaximum(Calendar.DATE);
+        return toLocalDateTime().getDayOfMonth();
+
     }
 
     // region 字符串转时间
@@ -451,7 +479,8 @@ public class Monment extends java.util.Date {
         Calendar c = Calendar.getInstance();
         c.setTime(this);
         c.set(Calendar.MILLISECOND, c.get(Calendar.MILLISECOND) + milliseconds);
-        return new Monment(c.getTimeInMillis());
+        this.setTime(c.getTimeInMillis());
+        return this;
     }
 
     /**
@@ -462,10 +491,13 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addSeconds(int seconds) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.SECOND, c.get(Calendar.SECOND) + seconds);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusSeconds(seconds).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.SECOND, c.get(Calendar.SECOND) + seconds);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -476,10 +508,14 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addMinutes(int minutes) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.MINUTE, c.get(Calendar.MINUTE) + minutes);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusMinutes(minutes).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.MINUTE, c.get(Calendar.MINUTE) + minutes);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -490,10 +526,13 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addHours(int hours) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.HOUR, c.get(Calendar.HOUR) + hours);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusHours(hours).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.HOUR, c.get(Calendar.HOUR) + hours);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -504,10 +543,13 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addDays(int days) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.DATE, c.get(Calendar.DATE) + days);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusDays(days).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.DATE, c.get(Calendar.DATE) + days);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -518,10 +560,13 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addMonths(int months) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.MONTH, c.get(Calendar.MONTH) + months);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusMonths(months).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.MONTH, c.get(Calendar.MONTH) + months);
+//        return new Monment(c.getTimeInMillis());
     }
 
     /**
@@ -532,10 +577,13 @@ public class Monment extends java.util.Date {
      * @return Monment
      */
     public Monment addYears(int years) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this);
-        c.set(Calendar.YEAR, c.get(Calendar.YEAR) + years);
-        return new Monment(c.getTimeInMillis());
+        long ms = toLocalDateTime().plusYears(years).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        this.setTime(ms);
+        return this;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(this);
+//        c.set(Calendar.YEAR, c.get(Calendar.YEAR) + years);
+//        return new Monment(c.getTimeInMillis());
     }
 
     // endregion
@@ -630,7 +678,9 @@ public class Monment extends java.util.Date {
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND,0);
-        return new Monment(c.getTimeInMillis());
+//        return new Monment(c.getTimeInMillis());
+        this.setTime(c.getTimeInMillis());
+        return this;
     }
 
     /**
@@ -645,7 +695,9 @@ public class Monment extends java.util.Date {
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND,0);
-        return new Monment(c.getTimeInMillis());
+        //return new Monment(c.getTimeInMillis());
+        this.setTime(c.getTimeInMillis());
+        return this;
     }
 
     /**
@@ -660,7 +712,9 @@ public class Monment extends java.util.Date {
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
         c.set(Calendar.MILLISECOND,0);
-        return new Monment(c.getTimeInMillis());
+        // return new Monment(c.getTimeInMillis());
+        this.setTime(c.getTimeInMillis());
+        return this;
     }
 
     /**
@@ -671,7 +725,9 @@ public class Monment extends java.util.Date {
     public Monment monthStart() {
         Calendar c = Calendar.getInstance();
         String startStr = toString("yyyy-M-") + c.getActualMinimum(Calendar.DATE) + " 00:00:00";
-        return Monment.parseDate(startStr);
+//        return Monment.parseDate(startStr);
+        this.setTime(Monment.parseDate(startStr).getTime());
+        return this;
     }
 
     /**
@@ -686,7 +742,9 @@ public class Monment extends java.util.Date {
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
         c.set(Calendar.MILLISECOND,0);
-        return new Monment(c.getTimeInMillis());
+        // return new Monment(c.getTimeInMillis());
+        this.setTime(c.getTimeInMillis());
+        return this;
     }
 
     /**
@@ -729,11 +787,11 @@ public class Monment extends java.util.Date {
      * 将日期按照一定的格式进行格式化为字符串。<br/>
      * 例如想将时间格式化为2012-03-05 12:56 ,则只需要传入formate为yyyy-MM-dd HH:mm即可。
      * 
-     * @param formate 格式化格式，如：yyyy-MM-dd HH:mm
+     * @param format 格式化格式，如：yyyy-MM-dd HH:mm
      * @return String 格式后的日期字符串。如果当前对象为null，则直接返回null。
      */
-    public String toString(String formate) {
-        DateFormat df = new SimpleDateFormat(formate);
+    public String toString(String format) {
+        DateFormat df = new SimpleDateFormat(format);
         return df.format(this);
     }
 
@@ -757,6 +815,15 @@ public class Monment extends java.util.Date {
         return df.format(this);
     }
 
+    public LocalDateTime toLocalDateTime() {
+        return LocalDateTime.ofInstant(this.toInstant(), ZoneId.systemDefault());
+    }
+
+
+    public Monment clone(){
+        return new Monment(this.getTime());
+    }
+
     /***
      * 静态构建方法
      * @return Monment实例
@@ -765,7 +832,22 @@ public class Monment extends java.util.Date {
         return new Monment();
     }
 
+    public static Monment now() {
+        return new Monment(System.currentTimeMillis());
+    }
+
+
+
+
+
+    public static Monment ofLocalDateTime(LocalDateTime localDateTime) {
+        Monment date = new Monment(localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
+        return date;
+    }
+
     public static void main(String[] args) {
+        Monment monment = Monment.parseDate("2019-03-30","yyyy-MM-dd").addMonths(-1);
+        System.out.println("2019-03-30 减一个月："+monment.toString("yyyy-MM-dd HH:mm:ss"));
         Monment start = new Monment(System.currentTimeMillis() - 10000);
         Monment current = new Monment();
         Monment end = new Monment(System.currentTimeMillis() + 100000);
