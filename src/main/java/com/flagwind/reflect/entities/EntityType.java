@@ -1,12 +1,9 @@
 package com.flagwind.reflect.entities;
 
 import com.flagwind.commons.StringUtils;
-import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class EntityType
 {
@@ -84,20 +81,20 @@ public class EntityType
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
         T result = null;
         if (instanceType != null) {
-			result = (T) AnnotatedElementUtils.getMergedAnnotation(instanceType,annotationClass);
-            // result = (T) instanceType.getAnnotation(annotationClass);
+//			result = (T) AnnotatedElementUtils.getMergedAnnotation(instanceType,annotationClass);
+             result = (T) instanceType.getAnnotation(annotationClass);
         }
        
         return result;
 	}
-
-	public <T extends Annotation> Set<T> getRepeatableAnnotations(Class<T> annotationClass) {
-		Set<T> result = new HashSet<>();
-		if (instanceType != null) {
-			result = AnnotatedElementUtils.getMergedRepeatableAnnotations(instanceType, annotationClass);
-		}
-		return result;
-	}
+//
+//	public <T extends Annotation> Set<T> getRepeatableAnnotations(Class<T> annotationClass) {
+//		Set<T> result = new HashSet<>();
+//		if (instanceType != null) {
+//			result = AnnotatedElementUtils.getMergedRepeatableAnnotations(instanceType, annotationClass);
+//		}
+//		return result;
+//	}
 
 	@Deprecated
 	public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
