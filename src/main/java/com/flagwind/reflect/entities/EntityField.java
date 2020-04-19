@@ -52,18 +52,6 @@ public class EntityField {
         }
     }
 
-    /**
-     * 先创建field，然后可以通过该方法获取property等属性
-     *
-     * @param other
-     */
-    public void copyFromPropertyDescriptor(EntityField other) {
-        this.setter = other.setter;
-        this.getter = other.getter;
-        this.javaType = other.javaType;
-        this.name = other.name;
-    }
-
 
     /**
      * 是否有该注解
@@ -74,15 +62,12 @@ public class EntityField {
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
         boolean result = false;
         if (field != null) {
-            //result = AnnotatedElementUtils.isAnnotated(field, annotationClass);
             result = field.isAnnotationPresent(annotationClass);
         }
         if (!result && setter != null) {
-            //result = AnnotatedElementUtils.isAnnotated(setter, annotationClass);
             result = setter.isAnnotationPresent(annotationClass);
         }
         if (!result && getter != null) {
-            //result = AnnotatedElementUtils.isAnnotated(getter, annotationClass);
             result = getter.isAnnotationPresent(annotationClass);
         }
         return result;
@@ -98,91 +83,35 @@ public class EntityField {
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
         T result = null;
         if (field != null) {
-            // result = AnnotatedElementUtils.findMergedAnnotation(field,annotationClass);
             result = field.getAnnotation(annotationClass);
         }
         if (result == null && setter != null) {
-            // result = AnnotatedElementUtils.findMergedAnnotation(setter,annotationClass);
             result = setter.getAnnotation(annotationClass);
         }
         if (result == null && getter != null) {
-            // result = AnnotatedElementUtils.findMergedAnnotation(getter,annotationClass);
             result = getter.getAnnotation(annotationClass);
         }
         return result;
     }
 
-//    public <T extends Annotation> Set<T> getRepeatableAnnotations(Class<T> annotationClass) {
-//        Set<T> result = new HashSet<>();
-//        if (field != null) {
-//            result = AnnotatedElementUtils.getMergedRepeatableAnnotations(field, annotationClass);
-//        }
-//        if (result == null && setter != null) {
-//            result = AnnotatedElementUtils.getMergedRepeatableAnnotations(setter, annotationClass);
-//        }
-//        if (result == null && getter != null) {
-//            result = AnnotatedElementUtils.getMergedRepeatableAnnotations(getter, annotationClass);
-//        }
-//        return result;
-//    }
 
 
-    // /**
-    //  * 是否有该注解
-    //  *
-    //  * @param annotationClass
-    //  * @return
-    //  */
-    // public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
-    //     boolean result = false;
-    //     if (field != null) {
-    //         result = field.isAnnotationPresent(annotationClass);
-    //     }
-    //     if (!result && setter != null) {
-    //         result = setter.isAnnotationPresent(annotationClass);
-    //     }
-    //     if (!result && getter != null) {
-    //         result = getter.isAnnotationPresent(annotationClass);
-    //     }
-    //     return result;
-    // }
 
-    // /**
-    //  * 获取指定的注解
-    //  *
-    //  * @param annotationClass
-    //  * @param <T>
-    //  * @return
-    //  */
-    // public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
-    //     T result = null;
-    //     if (field != null) {
-    //         result = field.getAnnotation(annotationClass);
-    //     }
-    //     if (result == null && setter != null) {
-    //         result = setter.getAnnotation(annotationClass);
-    //     }
-    //     if (result == null && getter != null) {
-    //         result = getter.getAnnotation(annotationClass);
-    //     }
-    //     return result;
-    // }
-//
-//
-//    @Deprecated
-//    public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
-//        T[] result = null;
-//        if (field != null) {
-//            result = field.getAnnotationsByType(annotationClass);
-//        }
-//        if (result == null && setter != null) {
-//            result = setter.getAnnotationsByType(annotationClass);
-//        }
-//        if (result == null && getter != null) {
-//            result = getter.getAnnotationsByType(annotationClass);
-//        }
-//        return result;
-//    }
+
+    @Deprecated
+    public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
+        T[] result = null;
+        if (field != null) {
+            result = field.getAnnotationsByType(annotationClass);
+        }
+        if (result == null && setter != null) {
+            result = setter.getAnnotationsByType(annotationClass);
+        }
+        if (result == null && getter != null) {
+            result = getter.getAnnotationsByType(annotationClass);
+        }
+        return result;
+    }
 
     public Object getValue(Object entity, Object[] args) throws InvocationTargetException, IllegalAccessException {
         if (getter != null) {

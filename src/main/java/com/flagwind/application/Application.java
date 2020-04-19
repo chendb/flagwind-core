@@ -7,14 +7,14 @@ import java.util.List;
  */
 public class Application {
 
-    private static ApplicationContentBase content;
+    private static ContentBase content;
 
-    private static ApplicationContentBase getContent() {
+    private static ContentBase getContent() {
         return content;
     }
 
 
-    public static void start(ApplicationContentBase content) {
+    public static void start(ContentBase content) {
         isStarted = true;
         Application.content = content;
     }
@@ -53,7 +53,7 @@ public class Application {
      * @param serviceType 服务类型。
      * @return T
      */
-    public static <T> T resolve(Class<?> serviceType) {
+    public static <T> T resolve(Class<T> serviceType) {
         return getContent().resolve(serviceType);
     }
 
@@ -65,7 +65,7 @@ public class Application {
      * @param <T>         泛型约束
      * @return
      */
-    public static <T> T resolve(Class<?> serviceType, String name) {
+    public static <T> T resolve(Class<T> serviceType, String name) {
         return getContent().resolve(serviceType, name);
     }
 
@@ -75,7 +75,7 @@ public class Application {
      * @param serviceType
      * @return List
      */
-    public static <T> List<T> resolveAll(Class<?> serviceType) {
+    public static <T> List<T> resolveAll(Class<T> serviceType) {
         return getContent().resolveAll(serviceType);
     }
 
