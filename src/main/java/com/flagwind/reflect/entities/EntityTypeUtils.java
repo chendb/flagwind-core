@@ -1,13 +1,14 @@
 package com.flagwind.reflect.entities;
 
 
-
 import javax.persistence.Entity;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -33,7 +34,7 @@ public class EntityTypeUtils
     {
         List<EntityField> fields = _getFields(entityClass, null, null);
         List<EntityField> properties = getProperties(entityClass);
-        Set<EntityField> usedSet = new HashSet<EntityField>();
+        Set<EntityField> usedSet = new HashSet<>();
         for(EntityField field : fields)
         {
             for(EntityField property : properties)
@@ -42,6 +43,7 @@ public class EntityTypeUtils
                 {
                     //泛型的情况下通过属性可以得到实际的类型
                     field.setJavaType(property.getJavaType());
+
                     break;
                 }
             }
@@ -51,7 +53,7 @@ public class EntityTypeUtils
 
     public static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, String propertyName)
     {
-        StringBuffer sb = new StringBuffer();//构建一个可变字符串用来构建方法名称
+        StringBuilder sb = new StringBuilder();//构建一个可变字符串用来构建方法名称
         Method setMethod;
         Method getMethod;
         PropertyDescriptor pd = null;
@@ -113,20 +115,14 @@ public class EntityTypeUtils
         }
         Field[] fields = entityClass.getDeclaredFields();
         int index = 0;
-        for(int i = 0; i < fields.length; i++)
-        {
-            Field field = fields[i];
+        for (Field field : fields) {
             //排除静态字段，解决bug#2
-            if(!Modifier.isStatic(field.getModifiers()))
-            {
-                if(level.intValue() != 0)
-                {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                if (level != 0) {
                     //将父类的字段放在前面
                     fieldList.add(index, new EntityField(field, getPropertyDescriptor(entityClass, field.getName())));
                     index++;
-                }
-                else
-                {
+                } else {
                     fieldList.add(new EntityField(field, getPropertyDescriptor(entityClass, field.getName())));
                 }
             }

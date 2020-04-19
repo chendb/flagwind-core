@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.TemporalUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -410,39 +409,6 @@ public class Monment extends java.util.Date {
         return new TimeSpan(Math.abs(this.getTime() - time.getTime()));
     }
 
-    /**
-     * 取得两个时间的时间差的指定时段类型的数值
-     * 如：m1:2018-05-31 08：30：30, m2:2018-05-31 08：25:10
-     * m1.diff(m2,DatePart.Hours) 为 0
-     * m1.diff(m2,DatePart.Minutes) 为 5
-     * m1.diff(m2,DatePart.Seconds) 为 20
-     */
-    @Deprecated
-    public long diff(Monment time, DatePart part) {
-        TimeSpan ts = new TimeSpan(this.getTime() - time.getTime());
-        if (part == null) {
-            return ts.totalMillisecond();
-        }
-
-        switch (part) {
-            case Years:
-                return ts.getYears();
-            case Months:
-                return ts.getMonths();
-            case Days:
-                return ts.getDays();
-            case Hours:
-                return ts.getHours();
-            case Minutes:
-                return ts.getMinutes();
-            case Seconds:
-                return ts.getSeconds();
-            case Milliseconds:
-                return ts.getMillisecond();
-            default:
-                return ts.totalMillisecond();
-        }
-    }
 
     // endregion
 
@@ -866,8 +832,7 @@ public class Monment extends java.util.Date {
 
 
     public static Monment ofLocalDateTime(LocalDateTime localDateTime) {
-        Monment date = new Monment(localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
-        return date;
+        return new Monment(localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
     }
 
     public static void main(String[] args) {
@@ -885,11 +850,9 @@ public class Monment extends java.util.Date {
         System.out.println("start:" + start.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("current:" + current.toString("yyyy-MM-dd HH:mm:ss"));
         System.out.println("end:" + end.toString("yyyy-MM-dd HH:mm:ss"));
-        System.out.println("end-start Minutes:" + end.diff(start, DatePart.Minutes));
-        System.out.println("end-start Seconds:" + end.diff(start, DatePart.Seconds));
-        System.out.println("start is after end:" + Boolean.toString(start.isAfter(end)));
-        System.out.println("start is before end:" + Boolean.toString(start.isBefore(end)));
-        System.out.println("current is between start and end:" + Boolean.toString(current.isBetween(start, end)));
+        System.out.println("start is after end:" + start.isAfter(end));
+        System.out.println("start is before end:" + start.isBefore(end));
+        System.out.println("current is between start and end:" + current.isBetween(start, end));
     }
 
 }

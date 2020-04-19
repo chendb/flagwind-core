@@ -1,14 +1,12 @@
 package com.flagwind.persistent.annotation;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
+import com.flagwind.persistent.model.ClauseCombine;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.flagwind.persistent.model.ClauseCombine;
+import static java.lang.annotation.ElementType.*;
 
 
 /**

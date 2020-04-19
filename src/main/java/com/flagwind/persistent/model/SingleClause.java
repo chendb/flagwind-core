@@ -1,7 +1,5 @@
 package com.flagwind.persistent.model;
 
-import com.flagwind.persistent.model.ParameterType;
-
 /**
  * 单条件短语
  * @author chendb

@@ -63,7 +63,7 @@ public class Application {
      * @param serviceType 服务类型
      * @param name        名称
      * @param <T>         泛型约束
-     * @return
+     * @return 对象
      */
     public static <T> T resolve(Class<T> serviceType, String name) {
         return getContent().resolve(serviceType, name);
@@ -72,7 +72,7 @@ public class Application {
     /**
      * 根据指定服务类型获取所有服务实例。
      *
-     * @param serviceType
+     * @param serviceType 类型
      * @return List
      */
     public static <T> List<T> resolveAll(Class<T> serviceType) {

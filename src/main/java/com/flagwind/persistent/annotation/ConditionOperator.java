@@ -1,13 +1,14 @@
 package com.flagwind.persistent.annotation;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+import com.flagwind.persistent.model.ClauseOperator;
+
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.flagwind.persistent.model.ClauseOperator;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 
 @Repeatable(ConditionOperators.class)

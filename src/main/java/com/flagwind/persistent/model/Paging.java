@@ -68,7 +68,7 @@ public class Paging implements Serializable {
 
 	public Long getPageCount() {
 		if (totalCount < 1)
-			return 0l;
+			return 0L;
 
 		return Math.round(Math.ceil((double) totalCount / pageSize));
 	}

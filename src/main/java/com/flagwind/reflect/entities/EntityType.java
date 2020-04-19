@@ -44,7 +44,7 @@ public class EntityType {
 		this.instanceType = instanceType;
 	}
 
-	public <T> T createInstance() throws Exception {
+	public <T> T newInstance() throws Exception {
 		return (T) getInstanceType().newInstance();
 	}
 

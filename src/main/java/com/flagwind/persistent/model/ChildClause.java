@@ -9,7 +9,7 @@ public class ChildClause extends CombineClause {
     private String name;
     private String childField;
     private String childTable;
-    private boolean included = true;
+    private boolean included;
     private ClauseOperator operator;
 
     public ChildClause(String name, boolean included, String childField, String childTable, ClauseCombine combine) {

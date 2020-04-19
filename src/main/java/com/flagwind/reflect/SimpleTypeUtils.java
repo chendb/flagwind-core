@@ -1,5 +1,6 @@
 package com.flagwind.reflect;
 
+import com.flagwind.commons.Monment;
 import com.flagwind.lang.CodeType;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,17 +13,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.flagwind.commons.Monment;
-
 /**
  * 简单类型判断工具
  */
 public class SimpleTypeUtils {
-    private static final Set<Class<?>> SIMPLE_TYPE_SET = new HashSet<Class<?>>();
+    private static final Set<Class<?>> SIMPLE_TYPE_SET = new HashSet<>();
 
-    /**
-     * 特别注意：由于基本类型有默认值，因此在实体类中不建议使用基本类型作为数据库字段类型
-     */
+    // 特别注意：由于基本类型有默认值，因此在实体类中不建议使用基本类型作为数据库字段类型
     static {
         SIMPLE_TYPE_SET.add(byte[].class);
         SIMPLE_TYPE_SET.add(String.class);

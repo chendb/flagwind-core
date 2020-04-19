@@ -15,13 +15,13 @@ public class CombineClause extends ArrayList<Clause> implements Clause {
 
 	private ClauseCombine combine;
 
-	public CombineClause(ClauseCombine combin) {
-		this.combine = combin;
+	public CombineClause(ClauseCombine combine) {
+		this.combine = combine;
 	}
 
-	public CombineClause(ClauseCombine combin, Collection<Clause> clauses) {
+	public CombineClause(ClauseCombine combine, Collection<Clause> clauses) {
 		super(clauses);
-		this.combine = combin;
+		this.combine = combine;
 	}
 
 	public ClauseCombine getCombine() {
