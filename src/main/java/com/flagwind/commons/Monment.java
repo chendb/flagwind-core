@@ -59,7 +59,7 @@ public class Monment extends java.util.Date {
 
     // region 时间片段枚举
 
-    public static enum DatePart {
+    public enum DatePart {
         Years, Months, Weeks, Days, Hours, Minutes, Seconds, Milliseconds
     }
 
@@ -748,7 +748,7 @@ public class Monment extends java.util.Date {
      * @return Integer 如：6
      */
     public int dayOfWeekInt() {
-        Integer dayNames[] = {7, 1, 2, 3, 4, 5, 6};
+        Integer[] dayNames = {7, 1, 2, 3, 4, 5, 6};
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;

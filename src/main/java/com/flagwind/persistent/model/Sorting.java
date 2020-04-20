@@ -69,7 +69,7 @@ public class Sorting {
 		this.mode = mode;
 	}
 
-	public static enum SortingMode {
+	public enum SortingMode {
 
 		Ascending, Descending,
 	}
