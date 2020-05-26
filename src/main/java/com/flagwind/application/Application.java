@@ -1,6 +1,7 @@
 package com.flagwind.application;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * author：chendb
@@ -42,6 +43,10 @@ public class Application {
         content = null;
     }
 
+    public static boolean contains(String name) {
+        return getContent().contains(name);
+    }
+
 
     public static <T> T resolve(String name) {
         return getContent().resolve(name);
@@ -77,6 +82,10 @@ public class Application {
      */
     public static <T> List<T> resolveAll(Class<T> serviceType) {
         return getContent().resolveAll(serviceType);
+    }
+
+    public static <T> Map<String,T> resolveMap(Class<T> serviceType) {
+        return getContent().resolveMap(serviceType);
     }
 
 
