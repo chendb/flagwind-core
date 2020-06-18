@@ -117,6 +117,7 @@ public class EntityField {
         if (getter != null) {
             return getter.invoke(entity, args);
         } else {
+            field.setAccessible(true);
             return field.get(entity);
         }
     }
