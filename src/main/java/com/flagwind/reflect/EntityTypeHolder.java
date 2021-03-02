@@ -1,6 +1,7 @@
 package com.flagwind.reflect;
 
 
+import com.flagwind.commons.StringUtils;
 import com.flagwind.reflect.entities.EntityField;
 import com.flagwind.reflect.entities.EntityType;
 import com.flagwind.reflect.entities.EntityTypeUtils;
@@ -27,6 +28,11 @@ public class EntityTypeHolder {
             return CACHE.get(clzss);
         }
 
+    }
+
+    public static EntityType forName(String className) throws ClassNotFoundException {
+        return CACHE.entrySet().stream().filter(s -> StringUtils.equalsIgnoreCase(s.getKey().toString(), className)).map(s -> s.getValue()).findFirst()
+                .orElse(getEntityType(Class.forName(className)));
     }
 
     public static List<EntityField> getFields(Class<?> clzss) {
